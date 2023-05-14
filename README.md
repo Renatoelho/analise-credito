@@ -70,4 +70,15 @@ docker run --rm \
   -d base-sistema-regionais:0.0.1
 ```
 
+### Ativando todos os serviços do fluxo
+
+```bash
+cd ..
+```
+
+```bash
+docker-compose -f docker-compose.yaml --compatibility up -d
+```
+
+
 ***Em Desenvolvimento...***

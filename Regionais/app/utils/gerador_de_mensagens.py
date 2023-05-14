@@ -19,8 +19,6 @@ from amostras_de_dados import VALOR_RENDA_COMPLEMENTAR
 
 def _regiao_mais_ufs(regiao: str) -> dict:
     for item in REGIOES:
-        print(regiao.strip())
-        print(list(item.keys())[0].strip())
         if regiao.strip() == list(item.keys())[0].strip():
             return item
 
@@ -30,7 +28,8 @@ def id_identificacao() -> str:
     semente = "".join(sample(NUMEROS, 5))
     return f"{prefixo}{datahora}{semente}"
 
-regiao_mais_ufs = _regiao_mais_ufs(getenv("REGIAO"))
+regiao_extra = list(choice(REGIOES).keys())[0]
+regiao_mais_ufs = _regiao_mais_ufs(getenv("REGIAO", regiao_extra))
 
 def regiao(regiao_mais_ufs: dict) -> str:
     return list(regiao_mais_ufs.keys())[0]

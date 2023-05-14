@@ -61,7 +61,7 @@ ENV PYTHONPATH="/home/regionais/app/utils"
 ENV TZ="America/Sao_Paulo"
 
 # porta de acesso a aplicação
-EXPOSE 8888
+EXPOSE 8888 
 
 # Start da aplicação no servidor
 ENTRYPOINT systemctl start regionais.service

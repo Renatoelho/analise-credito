@@ -10,15 +10,15 @@ load_dotenv()
 
 
 def publica_mensagem(json_mensagem: dict) -> bool:
-    mensagem = json.dumps(f"{json_mensagem}").encode("utf-8")
-    kafka_topico = os.getenv("KAFKA_TOPICO", None)
-    kafka_porta = os.getenv("KAFKA_PORTA", None)
-    kafka_servidor = os.getenv("KAFKA_SERVIDOR", None)
     try:
-        with KafkaProducer(
-            bootstrap_servers=[f"{kafka_servidor}:{kafka_porta}"]
-        ) as produtor:
-            produtor.send(kafka_topico, value=mensagem)
+        mensagem = json.dumps(f"{json_mensagem}").encode("utf-8")
+        kafka_topico = os.getenv("KAFKA_TOPICO", None)
+        kafka_porta = os.getenv("KAFKA_PORTA", None)
+        kafka_servidor = os.getenv("KAFKA_SERVIDOR", None)
+        produtor = KafkaProducer(
+            bootstrap_servers=f"{kafka_servidor}:{kafka_porta}"
+        )
+        produtor.send(kafka_topico, value=mensagem)
         return True
     except Exception as _:
         return False

@@ -14,11 +14,9 @@ app = FastAPI()
 async def check():
     try:
         exemplo_mensagem = mensagem()
-        print(exemplo_mensagem)
-        if not publica_mensagem(exemplo_mensagem):
-             raise ValueError("Erro")
+        publica_mensagem(exemplo_mensagem)
         return JSONResponse(status_code=200, content="Tudo Ok")
-    except Exception as _:
+    except Exception as erro:
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)
 
