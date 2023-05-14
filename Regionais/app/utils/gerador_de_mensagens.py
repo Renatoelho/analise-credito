@@ -1,25 +1,28 @@
 
 import string
-
+from os import getenv
 from random import choice
 from random import sample
-
 from datetime import date
 from datetime import datetime
 from datetime import timedelta
 
-from exemplos_de_dados import REGIOES
-from exemplos_de_dados import NUMEROS
-from exemplos_de_dados import ESTADO_CIVIL
-from exemplos_de_dados import NIVEL_ENSINO
-from exemplos_de_dados import VALOR_RENDA
-from exemplos_de_dados import PROFISSOES
-from exemplos_de_dados import VALOR_SOLICITADO
-from exemplos_de_dados import VALOR_RENDA_COMPLEMENTAR
+from amostras_de_dados import REGIOES
+from amostras_de_dados import NUMEROS
+from amostras_de_dados import ESTADO_CIVIL
+from amostras_de_dados import NIVEL_ENSINO
+from amostras_de_dados import VALOR_RENDA
+from amostras_de_dados import PROFISSOES
+from amostras_de_dados import VALOR_SOLICITADO
+from amostras_de_dados import VALOR_RENDA_COMPLEMENTAR
 
 
-def _regiao_mais_ufs() -> dict:
-    return sample(REGIOES, 1)[0]
+def _regiao_mais_ufs(regiao: str) -> dict:
+    for item in REGIOES:
+        print(regiao.strip())
+        print(list(item.keys())[0].strip())
+        if regiao.strip() == list(item.keys())[0].strip():
+            return item
 
 def id_identificacao() -> str:
     prefixo = "S"
@@ -27,7 +30,7 @@ def id_identificacao() -> str:
     semente = "".join(sample(NUMEROS, 5))
     return f"{prefixo}{datahora}{semente}"
 
-regiao_mais_ufs = _regiao_mais_ufs()
+regiao_mais_ufs = _regiao_mais_ufs(getenv("REGIAO"))
 
 def regiao(regiao_mais_ufs: dict) -> str:
     return list(regiao_mais_ufs.keys())[0]
@@ -86,22 +89,23 @@ def data_nascimento() -> str:
     dias = choice(range(1,365))
     hoje = date.today()
     td = timedelta(((idade * 365)*-1)+dias)
-    return hoje + td
+    data_nasc = hoje + td
+    return data_nasc.strftime("%Y-%m-%d")
      
 def estado_civil() -> str:
     return choice(ESTADO_CIVIL)
 
-def valor_solicitado() -> str:
-    return f"{choice(VALOR_SOLICITADO)}.00"
+def valor_solicitado() -> float:
+    return float(f"{choice(VALOR_SOLICITADO)}.00")
 
 def nivel_ensino() -> str:
     return choice(NIVEL_ENSINO)
 
-def valor_renda() -> str:
-    return f"{choice(VALOR_RENDA)}.00"
+def valor_renda() -> float:
+    return float(f"{choice(VALOR_RENDA)}.00")
 
-def valor_renda_complementar() -> str:
-    return f"{choice(VALOR_RENDA_COMPLEMENTAR)}.00"
+def valor_renda_complementar() -> float:
+    return float(f"{choice(VALOR_RENDA_COMPLEMENTAR)}.00")
 
 def profissao() -> str:
     return choice(PROFISSOES)
@@ -109,10 +113,10 @@ def profissao() -> str:
 def possui_outro_contrato() -> str:
     return choice(["SIM","NAO"])
 
-def evento() -> dict:
+def mensagem() -> dict:
     _regiao = regiao(regiao_mais_ufs)
     _uf = uf(regiao_mais_ufs)
-    conteudo_evento = {
+    conteudo_mensagem = {
     "idSolicitacao": id_identificacao(),
     "informacoesRegional": {
         "idRegional": id_regional(_regiao, _uf),
@@ -136,7 +140,7 @@ def evento() -> dict:
         "possuiOutroContrato": possui_outro_contrato()
         }
     }
-    return conteudo_evento
+    return conteudo_mensagem
 
 if __name__ == "__main__":
     _regiao = regiao(regiao_mais_ufs)

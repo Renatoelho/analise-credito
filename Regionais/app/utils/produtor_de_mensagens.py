@@ -9,8 +9,8 @@ from kafka import KafkaProducer
 load_dotenv()
 
 
-def publica_evento(json_evento: dict) -> bool:
-    mensagem = json.dumps(f"{json_evento}").encode("utf-8")
+def publica_mensagem(json_mensagem: dict) -> bool:
+    mensagem = json.dumps(f"{json_mensagem}").encode("utf-8")
     kafka_topico = os.getenv("KAFKA_TOPICO", None)
     kafka_porta = os.getenv("KAFKA_PORTA", None)
     kafka_servidor = os.getenv("KAFKA_SERVIDOR", None)
