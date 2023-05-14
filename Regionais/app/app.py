@@ -1,4 +1,4 @@
-#!/home/ERP/.virtualenvs/bin/python3
+#!/home/regionais/.virtualenvs/bin/python3
 
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
