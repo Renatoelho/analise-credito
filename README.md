@@ -82,3 +82,9 @@ docker-compose -f docker-compose.yaml --compatibility up -d
 
 
 ***Em Desenvolvimento...***
+
+
+https://rmoff.net/2018/08/02/kafka-listeners-explained/
+https://hub.docker.com/r/bitnami/kafka
+
+
