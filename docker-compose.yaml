@@ -5,8 +5,8 @@ services:
     depends_on:
       - kafka
     hostname: regional-sul
-    image: base-sistema-regionais:0.0.1
-    container_name: container_regional_sul
+    image: imagem-base-simulador:0.0.1
+    container_name: regional_sul
     ports:
       - "8881:8888"
     environment:
@@ -23,10 +23,118 @@ services:
       retries: 5
     networks:
       - rede-analise-credito
+  regional-sudeste:
+    depends_on:
+      - kafka
+    hostname: regional-sudeste
+    image: imagem-base-simulador:0.0.1
+    container_name: regional_sudeste
+    ports:
+      - "8882:8888"
+    environment:
+      - REGIAO=Sudeste
+    deploy:
+      resources:
+        limits:
+          memory: 256MB
+    restart: always
+    healthcheck:
+      test: curl -f http://regional-sudeste:8888/healthcheck || exit 1
+      interval: 20s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rede-analise-credito
+  regional-centro-oeste:
+    depends_on:
+      - kafka
+    hostname: regional-centro-oeste
+    image: imagem-base-simulador:0.0.1
+    container_name: regional_centro_oeste
+    ports:
+      - "8883:8888"
+    environment:
+      - REGIAO=Centro_Oeste
+    deploy:
+      resources:
+        limits:
+          memory: 256MB
+    restart: always
+    healthcheck:
+      test: curl -f http://regional-centro-oeste:8888/healthcheck || exit 1
+      interval: 25s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rede-analise-credito
+  regional-nordeste:
+    depends_on:
+      - kafka
+    hostname: regional-nordeste
+    image: imagem-base-simulador:0.0.1
+    container_name: regional_nordeste
+    ports:
+      - "8884:8888"
+    environment:
+      - REGIAO=Nordeste
+    deploy:
+      resources:
+        limits:
+          memory: 256MB
+    restart: always
+    healthcheck:
+      test: curl -f http://regional-nordeste:8888/healthcheck || exit 1
+      interval: 30s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rede-analise-credito
+  regional-norte:
+    depends_on:
+      - kafka
+    hostname: regional-norte
+    image: imagem-base-simulador:0.0.1
+    container_name: regional_norte
+    ports:
+      - "8885:8888"
+    environment:
+      - REGIAO=Norte
+    deploy:
+      resources:
+        limits:
+          memory: 256MB
+    restart: always
+    healthcheck:
+      test: curl -f http://regional-norte:8888/healthcheck || exit 1
+      interval: 35s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rede-analise-credito
+  motor-analise-credito:
+    depends_on:
+      - kafka
+    hostname: motor-analise-credito
+    image: imagem-base-simulador:0.0.1
+    container_name: motor-analise-credito
+    ports:
+      - "8889:8888"
+    deploy:
+      resources:
+        limits:
+          memory: 256MB
+    restart: always
+    healthcheck:
+      test: curl -f http://motor-analise-credito:8888/healthcheck-motor || exit 1
+      interval: 35s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rede-analise-credito
   zookeeper:
     image: docker.io/bitnami/zookeeper:3.8
     hostname: zookeeper
-    container_name: container_zookeeper
+    container_name: zookeeper
     ports:
       - "2181:2181"
     networks:
@@ -44,7 +152,7 @@ services:
       - zookeeper
     image: docker.io/bitnami/kafka:3.4
     hostname: kafka
-    container_name: container_kafka
+    container_name: kafka
     ports:
       - "9092:9092"
       - "9094:9094"
@@ -72,7 +180,3 @@ volumes:
 networks:
   rede-analise-credito:
     driver: bridge
-
-# Criando tópico: kafka-console-producer.sh --bootstrap-server 127.0.0.1:9094 --topic solicitacoes_regionais
-# Listando tópicos: kafka-topics.sh --list --bootstrap-server localhost:9094
-# Listando mensagens do tópico: kafka-console-consumer.sh --bootstrap-server localhost:9094 --topic solicitacoes_regionais --from-beginning

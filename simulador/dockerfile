@@ -5,12 +5,12 @@ FROM ubuntu:20.04
 SHELL ["/bin/bash", "-c"]
 
 # Cria o usuário, senha e diretório para aplicação
-RUN useradd -ms /bin/bash regionais -G sudo && \
-  passwd -d  regionais && \
-  mkdir -p /home/regionais/app 
+RUN useradd -ms /bin/bash user01 -G sudo && \
+  passwd -d  user01 && \
+  mkdir -p /home/user01/app 
 
 # Seleciona a pasta para ser utilizada nos comandos seguintes
-WORKDIR /home/regionais
+WORKDIR /home/user01
 
 # Atualiza o repositório APT, Instala o Python3.8, VENV, Nano, systemctl e etc...
 RUN apt update && \
@@ -27,41 +27,41 @@ RUN apt update && \
 # Cria o link apontando para o Python3.8 e adiciona ao .bashrc o interpretador do Python3
 RUN ln -sf /usr/bin/python3.8 /usr/bin/python3 && \
   echo "export PATH=$PATH:/usr/bin/python3" >> \
-  /home/regionais/.bashrc && \
-  source /home/regionais/.bashrc
+  /home/user01/.bashrc && \
+  source /home/user01/.bashrc
 
 # Seleciona a pasta para ser utilizada nos comandos seguintes
-WORKDIR /home/regionais/app
+WORKDIR /home/user01/app
 
 # Cópia dos arquivos da aplicação
 COPY app/ .
 
 # Cópia os arquivos para criar os serviços
-ADD deploy/regionais.service /etc/systemd/system/
+ADD deploy/simulador.service /etc/systemd/system/
 
 # Configurando os serviços da aplicação
 RUN systemctl daemon-reload && \
-  systemctl enable regionais.service
+  systemctl enable simulador.service
 
 # Atribuindo permissões para o usuário do diretório da aplicação
-RUN chown -R regionais:regionais /home/regionais/app 
+RUN chown -R user01:user01 /home/user01/app 
 
 # Atribui o usuário da Aplicação para os comandos seguintes
-USER regionais
+USER user01
 
 # Configurando o Python para aplicação
-RUN python3 -m venv /home/regionais/.virtualenvs && \
-  source /home/regionais/.virtualenvs/bin/activate && \
+RUN python3 -m venv /home/user01/.virtualenvs && \
+  source /home/user01/.virtualenvs/bin/activate && \
   pip install -U pip setuptools wheel && \
   pip install -r requirements.txt
 
 # Variáveis de ambiente do servidor - Gera Fácil
-ENV PYTHON_ENV="/home/regionais/app/.env"
-ENV PYTHONPATH="/home/regionais/app/utils"
+ENV PYTHON_ENV="/home/user01/app/.env"
+ENV PYTHONPATH="/home/user01/app/utils"
 ENV TZ="America/Sao_Paulo"
 
 # porta de acesso a aplicação
 EXPOSE 8888 
 
 # Start da aplicação no servidor
-ENTRYPOINT systemctl start regionais.service
+ENTRYPOINT systemctl start simulador.service

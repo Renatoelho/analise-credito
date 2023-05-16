@@ -2,73 +2,39 @@
 
 ![Análise de Crédito em Tempo Real](Regionais/app/docs/analise-credito-em-tempo-real.drawio.png)
 
+# Implementação
 
-### Fazendo o build da imagem que simula as Regionais
+### Requisitos para implementação
+
+- Ubuntu 20.04 (Host)
+
+- Docker 23.0.3 (Host)
+
+- Docker-Compose 1.25.0 (Host)
+
+- Git 2.25.1 ou superior (Host)
+
+### Clonando o repositório para iniciar a implementação
 
 ```bash
-cd Regionais/
+git clone https://github.com/Renatoelho/analise-credito.git "analise-credito"
 ```
 
 ```bash
-docker build -f dockerfile -t base-sistema-regionais:0.0.1 .
+cd analise-credito/
 ```
 
-### Um contâiner para simular cada regional
 
-- Centro_Oeste
+### Fazendo o build da imagem que simula as regionais e o motor de análise de crédito
 
 ```bash
-docker run --rm \
-  -e REGIAO=Centro_Oeste \
-  --name regional-centro-oeste \
-  --hostname regional-centro-oeste \
-  -p 8881:8888 \
-  -d base-sistema-regionais:0.0.1
+cd simulador/
 ```
-
-- Nordeste
 
 ```bash
-docker run --rm \
-  -e REGIAO=Nordeste \
-  --name regional-nordeste \
-  --hostname regional-nordeste \
-  -p 8882:8888 \
-  -d base-sistema-regionais:0.0.1
+docker build -f dockerfile -t imagem-base-simulador:0.0.1 .
 ```
 
-- Norte
-
-```bash
-docker run --rm \
-  -e REGIAO=Norte \
-  --name regregionaliao-norte \
-  --hostname regional-norte \
-  -p 8883:8888 \
-  -d base-sistema-regionais:0.0.1
-```
-
-- Sudeste
-
-```bash
-docker run --rm \
-  -e REGIAO=Sudeste \
-  --name regional-sudeste \
-  --hostname regional-sudeste \
-  -p 8884:8888 \
-  -d base-sistema-regionais:0.0.1
-```
-
-- Sul
-
-```bash
-docker run --rm \
-  -e REGIAO=Sul \
-  --name regional-sul \
-  --hostname regional-sul \
-  -p 8885:8888 \
-  -d base-sistema-regionais:0.0.1
-```
 
 ### Ativando todos os serviços do fluxo
 
@@ -80,8 +46,20 @@ cd ..
 docker-compose -f docker-compose.yaml --compatibility up -d
 ```
 
+# Verificando os serviços (contâiners)
+
+```bash
+docker ps --format "{{.ID}}\t{{.Names}}\t{{.Status}}" | sort -k2
+```
 
 ***Em Desenvolvimento...***
+
+
+Criando tópico: kafka-console-producer.sh --bootstrap-server 127.0.0.1:9094 --topic solicitacoes_regionais
+
+Listando tópicos: kafka-topics.sh --list --bootstrap-server localhost:9094
+
+Listando mensagens do tópico: kafka-console-consumer.sh --bootstrap-server localhost:9094 --topic solicitacoes_regionais --from-beginning
 
 
 https://rmoff.net/2018/08/02/kafka-listeners-explained/
