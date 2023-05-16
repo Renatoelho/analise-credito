@@ -1,6 +1,6 @@
 # Análise de crédito em tempo real
 
-![Análise de Crédito em Tempo Real](Regionais/app/docs/analise-credito-em-tempo-real.drawio.png)
+![Análise de Crédito em Tempo Real](simulador/app/docs/analise-credito-em-tempo-real.drawio.png)
 
 # Implementação
 
