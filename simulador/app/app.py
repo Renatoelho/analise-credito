@@ -3,6 +3,7 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
+from modelos.modelo_mensagem import Payload
 from utils.gerador_de_mensagens import mensagem
 from utils.produtor_de_mensagens import publica_mensagem
 
@@ -10,8 +11,8 @@ from utils.produtor_de_mensagens import publica_mensagem
 app = FastAPI()
 
 
-@app.get("/healthcheck")
-async def check():
+@app.get("/healthcheck-regionais")
+async def check_regionais():
     try:
         exemplo_mensagem = mensagem()
         publica_mensagem(exemplo_mensagem)
@@ -21,7 +22,7 @@ async def check():
         return JSONResponse(status_code=500, content=erro)
 
 @app.get("/healthcheck-motor")
-async def check():
+async def check_motor():
     try:
         return JSONResponse(status_code=200, content="Tudo Ok")
     except Exception as erro:
@@ -36,13 +37,12 @@ async def exemplo():
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)
 
-@app.get("/motor-analise-credito")
-async def exemplo():
+@app.post("/motor-analise-credito")
+async def motor(payload: Payload):
     try:
-        resultado_analise = (
-            {"status": "Adicione aqui o resultado da análise de crédito"}
-        )
-        return JSONResponse(status_code=200, content=resultado_analise)
+        payload.informacoes_cliente.cpf = "999.999.999-99"
+        payload.informacoes_cliente.nome = "teste teste teste teste..."
+        return JSONResponse(status_code=200, content=payload.dict())
     except Exception as erro:
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)

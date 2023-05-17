@@ -1,0 +1,1 @@
+from . import modelo_mensagem

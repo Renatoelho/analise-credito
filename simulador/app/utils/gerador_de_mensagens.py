@@ -16,6 +16,8 @@ from amostras_de_dados import PROFISSOES
 from amostras_de_dados import VALOR_SOLICITADO
 from amostras_de_dados import VALOR_RENDA_COMPLEMENTAR
 
+from modelos.modelo_mensagem import Mensagem
+
 
 def _regiao_mais_ufs(regiao: str) -> dict:
     for item in REGIOES:
@@ -115,31 +117,43 @@ def possui_outro_contrato() -> str:
 def mensagem() -> dict:
     _regiao = regiao(regiao_mais_ufs)
     _uf = uf(regiao_mais_ufs)
-    conteudo_mensagem = {
-    "idSolicitacao": id_identificacao(),
-    "informacoesRegional": {
-        "idRegional": id_regional(_regiao, _uf),
-        "regiao": _regiao,
-        "uf": _uf,
-        "idRepresentante": id_Representante(_uf),
-        "idFuncionario": id_funcionario(_uf),
-        "cidade": cidade()
-    },
-    "informacoesCliente": {
-        "cpf": mascara_cpf(gera_cpf()),
-        "nome": nome(),
-        "sexo": sexo(),
-        "dataNascimento": data_nascimento(),
-        "estadoCivil": estado_civil(),
-        "valorSolicitado": valor_solicitado(),
-        "escolaridade": nivel_ensino(),
-        "renda": valor_renda(),
-        "rendaComplementar": valor_renda_complementar(),
-        "profissao": profissao(),
-        "possuiOutroContrato": possui_outro_contrato()
+
+    _informacoes_regional =(
+        {
+            "id_regional": id_regional(_regiao, _uf),
+            "regiao": _regiao,
+            "uf": _uf,
+            "id_representante": id_Representante(_uf),
+            "id_funcionario": id_funcionario(_uf),
+            "cidade": cidade()
         }
-    }
-    return conteudo_mensagem
+    )
+
+    _informacoes_cliente =(
+        {
+            "cpf": mascara_cpf(gera_cpf()),
+            "nome": nome(),
+            "sexo": sexo(),
+            "data_nascimento": data_nascimento(),
+            "estado_civil": estado_civil(),
+            "valor_solicitado": valor_solicitado(),
+            "escolaridade": nivel_ensino(),
+            "renda": valor_renda(),
+            "renda_complementar": valor_renda_complementar(),
+            "profissao": profissao(),
+            "possui_outro_contrato": possui_outro_contrato()
+        }
+    )
+
+    _conteudo_mensagem =(
+        {
+            "id_solicitacao": id_identificacao(),
+            "informacoes_regional": _informacoes_regional,
+            "informacoes_cliente": _informacoes_cliente,
+        }
+    )
+
+    return Mensagem(**_conteudo_mensagem).dict()
 
 if __name__ == "__main__":
     _regiao = regiao(regiao_mais_ufs)

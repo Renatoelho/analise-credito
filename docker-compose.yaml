@@ -17,7 +17,7 @@ services:
           memory: 256MB
     restart: always
     healthcheck:
-      test: curl -f http://regional-sul:8888/healthcheck || exit 1
+      test: curl -f http://regional-sul:8888/healthcheck-regionais || exit 1
       interval: 15s
       timeout: 10s
       retries: 5
@@ -39,7 +39,7 @@ services:
           memory: 256MB
     restart: always
     healthcheck:
-      test: curl -f http://regional-sudeste:8888/healthcheck || exit 1
+      test: curl -f http://regional-sudeste:8888/healthcheck-regionais || exit 1
       interval: 20s
       timeout: 10s
       retries: 5
@@ -61,7 +61,7 @@ services:
           memory: 256MB
     restart: always
     healthcheck:
-      test: curl -f http://regional-centro-oeste:8888/healthcheck || exit 1
+      test: curl -f http://regional-centro-oeste:8888/healthcheck-regionais || exit 1
       interval: 25s
       timeout: 10s
       retries: 5
@@ -83,7 +83,7 @@ services:
           memory: 256MB
     restart: always
     healthcheck:
-      test: curl -f http://regional-nordeste:8888/healthcheck || exit 1
+      test: curl -f http://regional-nordeste:8888/healthcheck-regionais || exit 1
       interval: 30s
       timeout: 10s
       retries: 5
@@ -105,7 +105,7 @@ services:
           memory: 256MB
     restart: always
     healthcheck:
-      test: curl -f http://regional-norte:8888/healthcheck || exit 1
+      test: curl -f http://regional-norte:8888/healthcheck-regionais || exit 1
       interval: 35s
       timeout: 10s
       retries: 5
