@@ -1,5 +1,4 @@
-
-from typing import Union
+#!/home/user01/.virtualenvs/bin/python3
 
 import requests
 

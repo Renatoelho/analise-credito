@@ -27,8 +27,3 @@ class Mensagem(BaseModel):
     id_solicitacao: str
     informacoes_regional: InformacoesRegional
     informacoes_cliente: InformacoesCliente
-
-class Payload(BaseModel):
-    id_solicitacao: str
-    informacoes_regional: InformacoesRegional
-    informacoes_cliente: InformacoesCliente

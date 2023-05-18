@@ -7,6 +7,7 @@ from datetime import date
 from datetime import datetime
 from datetime import timedelta
 
+from modelos.mensagem import Mensagem
 from amostras_de_dados import REGIOES
 from amostras_de_dados import NUMEROS
 from amostras_de_dados import ESTADO_CIVIL
@@ -15,8 +16,6 @@ from amostras_de_dados import VALOR_RENDA
 from amostras_de_dados import PROFISSOES
 from amostras_de_dados import VALOR_SOLICITADO
 from amostras_de_dados import VALOR_RENDA_COMPLEMENTAR
-
-from modelos.modelo_mensagem import Mensagem
 
 
 def _regiao_mais_ufs(regiao: str) -> dict:

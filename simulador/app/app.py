@@ -3,13 +3,14 @@
 from fastapi import FastAPI
 from fastapi.responses import JSONResponse
 
-from modelos.modelo_mensagem import Payload
+from modelos.motor import Motor
+from modelos.resultado import Resultado
+from modelos.resultado import OpcoesParcelas
 from utils.gerador_de_mensagens import mensagem
 from utils.produtor_de_mensagens import publica_mensagem
 
 
 app = FastAPI()
-
 
 @app.get("/healthcheck-regionais")
 async def check_regionais():
@@ -38,11 +39,40 @@ async def exemplo():
         return JSONResponse(status_code=500, content=erro)
 
 @app.post("/motor-analise-credito")
-async def motor(payload: Payload):
+async def motor_analise_credito(motor: Motor):
     try:
-        payload.informacoes_cliente.cpf = "999.999.999-99"
-        payload.informacoes_cliente.nome = "teste teste teste teste..."
-        return JSONResponse(status_code=200, content=payload.dict())
+        _info_origem = {"id_solicitacao": motor.id_solicitacao}
+        _informacoes_resultado_analise = {
+            "resultado": "True", #Criar função
+            "porcentagem_aprovada": 90.0 #Criar função
+        }
+        _opcoes_parcelas = [
+            {
+                "valor_parcela": 1000.0, #Criar função
+                "prazo": 120, #Criar função
+                "juros": 0.0 #Criar função
+            },
+            {
+                "valor_parcela": 900.0, ##Criar função
+                "prazo": 110, #Criar função
+                "juros": 0.8 #Criar função
+            },
+            {
+                "valor_parcela": 500.0, #Criar função
+                "prazo": 150, #Criar função
+                "juros": 0.6 #Criar função
+            }
+        ]
+        _estrutura_resultado = {
+            "id_resultado": "R2023051621095197012", #Criar função
+            "info_origem": _info_origem,
+            "informacoes_resultado_analise": _informacoes_resultado_analise,
+            "opcoes_parcelas": OpcoesParcelas(opcoes_parcelas=_opcoes_parcelas)             
+        }
+
+        estrutura_resultado = Resultado(**_estrutura_resultado)
+
+        return JSONResponse(status_code=200, content=estrutura_resultado.dict())
     except Exception as erro:
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)

@@ -57,7 +57,7 @@ RUN python3 -m venv /home/user01/.virtualenvs && \
 
 # Variáveis de ambiente do servidor - Gera Fácil
 ENV PYTHON_ENV="/home/user01/app/.env"
-ENV PYTHONPATH="/home/user01/app/utils"
+ENV PYTHONPATH="/home/user01/app/utils:/home/user01/app/modelos:/home/user01/app/testes"
 ENV TZ="America/Sao_Paulo"
 
 # porta de acesso a aplicação

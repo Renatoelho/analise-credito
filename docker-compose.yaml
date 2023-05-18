@@ -116,7 +116,7 @@ services:
       - kafka
     hostname: motor-analise-credito
     image: imagem-base-simulador:0.0.1
-    container_name: motor-analise-credito
+    container_name: motor_analise_credito
     ports:
       - "8889:8888"
     deploy:

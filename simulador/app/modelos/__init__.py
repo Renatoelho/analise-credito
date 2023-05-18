@@ -1,1 +1,4 @@
-from . import modelo_mensagem
+
+from . import motor
+from . import resultado
+from . import mensagem
