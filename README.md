@@ -46,6 +46,12 @@ cd ..
 docker-compose -f docker-compose.yaml --compatibility up -d
 ```
 
+Ajustar permissões, pois o contâiner Apache Nifi registry é non-root
+
+> ***IMPORTANTE:*** No primeiro start dos serviços, pode ocorrer um erro no serviço '***nifi-registry***' se a permissão de acesso ao volume criado for negada. Nesse caso, desative os serviços (***docker-compose -f docker-compose.yaml --compatibility down***) e ***altere as permissões do volume***. Use o comando '***sudo chmod -R 777 volumes/nifi_registry/***' e, em seguida, suba novamente os serviços. Tudo deve funcionar corretamente.
+
+
+
 # Verificando os serviços (contâiners)
 
 ```bash
