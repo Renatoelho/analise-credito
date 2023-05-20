@@ -48,9 +48,20 @@ docker-compose -f docker-compose.yaml --compatibility up -d
 
 Ajustar permissões, pois o contâiner Apache Nifi registry é non-root
 
+Deixe o docker-compose criar o diretório para os volumes e depois altere as permissões.
+
+```bash
+sudo chmod -R 777 volumes/
+```
+
 > ***IMPORTANTE:*** No primeiro start dos serviços, pode ocorrer um erro no serviço '***nifi-registry***' se a permissão de acesso ao volume criado for negada. Nesse caso, desative os serviços (***docker-compose -f docker-compose.yaml --compatibility down***) e ***altere as permissões do volume***. Use o comando '***sudo chmod -R 777 volumes/nifi_registry/***' e, em seguida, suba novamente os serviços. Tudo deve funcionar corretamente.
 
 
+# Criando senhas pelo terminal
+
+```bash
+openssl rand -hex 16
+```
 
 # Verificando os serviços (contâiners)
 
@@ -73,3 +84,6 @@ https://rmoff.net/2018/08/02/kafka-listeners-explained/
 https://hub.docker.com/r/bitnami/kafka
 
 
+https://hub.docker.com/_/microsoft-mssql-server?tab=description
+
+https://learn.microsoft.com/pt-br/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver16 

@@ -194,15 +194,15 @@ services:
       timeout: 40s
       retries: 3
     volumes:
-      - nifi-database_repository:/opt/nifi/nifi-current/database_repository
-      - nifi-flowfile_repository:/opt/nifi/nifi-current/flowfile_repository
-      - nifi-content_repository:/opt/nifi/nifi-current/content_repository
-      - nifi-provenance_repository:/opt/nifi/nifi-current/provenance_repository
-      - nifi-conf:/opt/nifi/nifi-current/conf
-      - nifi-state:/opt/nifi/nifi-current/state
-      - ./nifi/logs:/opt/nifi/nifi-current/logs
-      - ./nifi/jdbc:/opt/nifi/nifi-current/jdbc
-      - ./nifi/credentials:/opt/nifi/nifi-current/credentials
+      - nifi_database:/opt/nifi/nifi-current/database_repository
+      - nifi_flowfile:/opt/nifi/nifi-current/flowfile_repository
+      - nifi_content:/opt/nifi/nifi-current/content_repository
+      - nifi_provenance:/opt/nifi/nifi-current/provenance_repository
+      - nifi_conf:/opt/nifi/nifi-current/conf
+      - nifi_state:/opt/nifi/nifi-current/state
+      - ./volumes/nifi/logs:/opt/nifi/nifi-current/logs
+      - ./volumes/nifi/jdbc:/opt/nifi/nifi-current/jdbc
+      - ./volumes/nifi/credentials:/opt/nifi/nifi-current/credentials
     networks:
       - rede-analise-credito
   nifi-registry:
@@ -229,21 +229,66 @@ services:
       timeout: 40s
       retries: 3
     volumes:
-        - ./nifi_registry/database:/opt/nifi-registry/nifi-registry-current/database
-        - ./nifi_registry/flow_storage:/opt/nifi-registry/nifi-registry-current/flow_storage
+        - ./volumes/nifi_registry/database:/opt/nifi-registry/nifi-registry-current/database
+        - ./volumes/nifi_registry/flow_storage:/opt/nifi-registry/nifi-registry-current/flow_storage
     networks:
         - rede-analise-credito
-
+  sqlserver:
+    depends_on:
+      - kafka
+    hostname: sqlserver
+    container_name: sqlserver
+    image: mcr.microsoft.com/mssql/server:2022-latest
+    ports:
+      - "1433:1433"
+    environment:
+      SA_PASSWORD: "b90bee3b63bf33fa9901f92e"
+      ACCEPT_EULA: "Y"
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    restart: always
+    volumes:
+      - ./volumes/sqlserver/sqlserver_data:/var/opt/mssql/data
+      - ./volumes/sqlserver/sqlserver_log:/var/opt/mssql/log
+      - ./volumes/sqlserver/sqlserver_secrets:/var/opt/mssql/secrets
+    networks:
+    - rede-analise-credito
+  minio-s3:
+    depends_on:
+      - kafka
+    hostname: minio-s3
+    container_name: minio-s3
+    image: bitnami/minio:2023
+    ports: 
+      - "9000:9000"
+      - "9001:9001"
+    environment: 
+      - MINIO_ROOT_USER=admin
+      - MINIO_ROOT_PASSWORD=eO3RNPcKgWInlzPJuI08
+    deploy:
+      resources:
+        limits:
+          memory: 2G
+    restart: always
+    volumes: 
+      - minio_data:/data
+      - minio_certs:/certs
+    networks:
+      - rede-analise-credito
 
 volumes:
   zookeeper_data:
   kafka_data:
-  nifi-database_repository:
-  nifi-flowfile_repository:
-  nifi-content_repository:
-  nifi-provenance_repository:
-  nifi-state:
-  nifi-conf:
+  nifi_database:
+  nifi_flowfile:
+  nifi_content:
+  nifi_provenance:
+  nifi_state:
+  nifi_conf:
+  minio_data:
+  minio_certs:
 
 networks:
   rede-analise-credito:
