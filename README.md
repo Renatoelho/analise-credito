@@ -69,6 +69,10 @@ openssl rand -hex 16
 docker ps --format "{{.ID}}\t{{.Names}}\t{{.Status}}" | sort -k2
 ```
 
+```SQL
+SELECT * FROM analise_credito_db.dbo.exemplo;
+```
+
 ***Em Desenvolvimento...***
 
 
