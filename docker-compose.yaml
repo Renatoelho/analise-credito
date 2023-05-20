@@ -202,7 +202,7 @@ services:
       - nifi_state:/opt/nifi/nifi-current/state
       - ./volumes/nifi/logs:/opt/nifi/nifi-current/logs
       - ./volumes/nifi/credentials:/opt/nifi/nifi-current/credentials
-      - ./JDBCs:/opt/nifi/nifi-current/jdbc
+      - ./jdbc:/opt/nifi/nifi-current/jdbc
     networks:
       - rede-analise-credito
   nifi-registry:
