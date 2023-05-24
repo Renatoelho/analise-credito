@@ -242,14 +242,15 @@ services:
     ports:
       - "1433:1433"
     environment:
-      SA_PASSWORD: "b90bee3b63bf33fa9901f92e"
-      ACCEPT_EULA: "Y"
+      - SA_PASSWORD=b90bee3b63bf33fa9901f92e
+      - ACCEPT_EULA=Y
     deploy:
       resources:
         limits:
           memory: 2G
     restart: always
     volumes:
+      - ./sql/initdb:/docker-entrypoint-initdb.d
       - ./volumes/sqlserver/sqlserver_data:/var/opt/mssql/data
       - ./volumes/sqlserver/sqlserver_log:/var/opt/mssql/log
       - ./volumes/sqlserver/sqlserver_secrets:/var/opt/mssql/secrets
