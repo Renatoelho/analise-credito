@@ -8,6 +8,7 @@ from modelos.resultado import Resultado
 from modelos.resultado import OpcoesParcelas
 from utils.gerador_de_mensagens import mensagem
 from utils.produtor_de_mensagens import publica_mensagem
+from utils.estrutura_modelagem_sql import execute_query
 
 
 app = FastAPI()
@@ -15,6 +16,7 @@ app = FastAPI()
 @app.get("/healthcheck-regionais")
 async def check_regionais():
     try:
+        execute_query()
         exemplo_mensagem = mensagem()
         publica_mensagem(exemplo_mensagem)
         return JSONResponse(status_code=200, content="Tudo Ok")

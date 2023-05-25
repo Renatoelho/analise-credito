@@ -73,6 +73,8 @@ docker ps --format "{{.ID}}\t{{.Names}}\t{{.Status}}" | sort -k2
 SELECT * FROM analise_credito_db.dbo.exemplo;
 ```
 
+
+
 ***Em Desenvolvimento...***
 
 
@@ -92,4 +94,3 @@ https://hub.docker.com/_/microsoft-mssql-server?tab=description
 
 https://learn.microsoft.com/pt-br/sql/connect/jdbc/download-microsoft-jdbc-driver-for-sql-server?view=sql-server-ver16 
 
-https://stackoverflow.com/questions/58309452/docker-initialize-database-tables-and-records-in-sql-server

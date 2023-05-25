@@ -1,15 +1,10 @@
 
 -- Cria database para o fluxo de análise de crédito, se ele não existir.
 
-IF NOT EXISTS (SELECT name FROM sys.databases WHERE name = 'analise_credito_db')
-BEGIN
-    CREATE DATABASE analise_credito_db
-END;
+CREATE DATABASE analise_credito_db;
 
 -- Cria a tabela 'informacoes_clientes', se ela não existir.
 
-IF NOT EXISTS (SELECT name FROM sys.tables WHERE DB_NAME() = 'analise_credito_db' and name = 'informacoes_clientes')
-BEGIN
 CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
     id INT IDENTITY(1,1),
     id_solicitacao VARCHAR(20) PRIMARY KEY,
@@ -31,12 +26,9 @@ CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
     possui_outro_contrato VARCHAR(3),
     datahora_registro DATETIME DEFAULT GETDATE()
 );
-END
 
 -- Cria a tabela 'registro_solicitacoes_kafka', se ela não existir.
 
-IF NOT EXISTS (SELECT name FROM sys.tables WHERE DB_NAME() = 'analise_credito_db' and name = 'registro_solicitacoes_kafka')
-BEGIN
 CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
@@ -48,7 +40,6 @@ CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
 	datahora_registro DATETIME DEFAULT GETDATE(),
     FOREIGN KEY (id_solicitacao) REFERENCES informacoes_clientes(id_solicitacao)
 );
-END
 
 -- Insere dados de cliente em 'informacoes_clientes'.
 
