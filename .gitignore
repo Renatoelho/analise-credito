@@ -3,3 +3,4 @@
 /**/.json
 /**/pep8
 /**/volumes
+/**/docker-compose-sqlserver.yaml

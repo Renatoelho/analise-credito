@@ -5,6 +5,7 @@ from typing import Union
 
 from pymssql import connect
 
+
 query_verifica_database_existe = """
 SELECT COUNT(1)
 FROM sys.databases
@@ -28,7 +29,7 @@ CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
     data_nascimento DATE,
     estado_civil VARCHAR(50),
     escolaridade VARCHAR(50),
-    profissao VARCHAR(50),
+    profissao VARCHAR(100),
     renda DECIMAL(18, 2),
     renda_complementar DECIMAL(18, 2),
     cidade VARCHAR(100),
@@ -53,24 +54,21 @@ CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
 );
 """
 
-def _execute_query(query, autocommit: bool = False) -> Union[list, bool]:
+def _execute_query(query: str, ddl: bool = False) -> Union[list, bool]:
     try:
         with connect(
             server=getenv('SQLSERVER_SERVER'),
             user=getenv('SQLSERVER_USUARIO'),
             password=getenv('SQLSERVER_SENHA'),
-            database=getenv('SQLSERVER_DB')
-        ) as conn:
-            if autocommit:
-                conn.autocommit(True)
-            else:
-                conn.autocommit(False)
-            cursor = conn.cursor()
+            database=getenv('SQLSERVER_DB'),
+            autocommit=ddl
+        ) as conexao:
+            cursor = conexao.cursor()
             cursor.execute(query)
             resultado = cursor.fetchall()
             return resultado
     except Exception as _:
-        if autocommit:
+        if ddl:
             return True
         else:
             return False

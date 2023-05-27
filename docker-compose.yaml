@@ -143,6 +143,7 @@ services:
       - "zookeeper_data:/bitnami"
     environment:
       - ALLOW_ANONYMOUS_LOGIN=yes
+      - TZ=America/Sao_Paulo
     deploy:
       resources:
         limits:
@@ -168,6 +169,7 @@ services:
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
       - KAFKA_CFG_ADVERTISED_LISTENERS=PLAINTEXT://kafka:9092,EXTERNAL://localhost:9094
       - KAFKA_LISTENER_SECURITY_PROTOCOL_MAP=PLAINTEXT:PLAINTEXT,CONTROLLER:PLAINTEXT,EXTERNAL:PLAINTEXT
+      - TZ=America/Sao_Paulo
     deploy:
       resources:
         limits:
@@ -181,8 +183,9 @@ services:
     ports:
       - "8443:8443"
     environment:
-      SINGLE_USER_CREDENTIALS_USERNAME: nifi
-      SINGLE_USER_CREDENTIALS_PASSWORD: mkYUQBJ9BBhc38RWa1p3E76xUR1rhYGR
+      - SINGLE_USER_CREDENTIALS_USERNAME=nifi
+      - SINGLE_USER_CREDENTIALS_PASSWORD=mkYUQBJ9BBhc38RWa1p3E76xUR1rhYGR
+      - TZ=America/Sao_Paulo
     deploy:
       resources:
         limits:
@@ -218,6 +221,7 @@ services:
         - NIFI_REGISTRY_DB_DIR=/opt/nifi-registry/nifi-registry-current/database
         - NIFI_REGISTRY_FLOW_PROVIDER=file
         - NIFI_REGISTRY_FLOW_STORAGE_DIR=/opt/nifi-registry/nifi-registry-current/flow_storage
+        - TZ=America/Sao_Paulo
     deploy:
       resources:
         limits:
@@ -244,13 +248,13 @@ services:
     environment:
       - SA_PASSWORD=b90bee3b63bf33fa9901f92e
       - ACCEPT_EULA=Y
+      - TZ=America/Sao_Paulo
     deploy:
       resources:
         limits:
           memory: 2G
     restart: always
     volumes:
-      - ./sql/initdb:/docker-entrypoint-initdb.d
       - ./volumes/sqlserver/sqlserver_data:/var/opt/mssql/data
       - ./volumes/sqlserver/sqlserver_log:/var/opt/mssql/log
       - ./volumes/sqlserver/sqlserver_secrets:/var/opt/mssql/secrets
@@ -268,6 +272,7 @@ services:
     environment: 
       - MINIO_ROOT_USER=admin
       - MINIO_ROOT_PASSWORD=eO3RNPcKgWInlzPJuI08
+      - TZ=America/Sao_Paulo
     deploy:
       resources:
         limits:
