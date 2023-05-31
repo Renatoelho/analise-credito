@@ -1,13 +1,13 @@
 
--- Cria database para o fluxo de análise de crédito, se ele não existir.
+-- Cria database para o fluxo de análise de crédito
 
 CREATE DATABASE analise_credito_db;
 
--- Cria a tabela 'informacoes_clientes', se ela não existir.
+-- Cria a tabela 'informacoes_clientes'
 
 CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
-    id INT IDENTITY(1,1),
-    id_solicitacao VARCHAR(20) PRIMARY KEY,
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    id_solicitacao VARCHAR(20),
     id_regional VARCHAR(20),
     id_representante VARCHAR(20),
     id_funcionario VARCHAR(20),
@@ -29,7 +29,7 @@ CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
 
 -- SELECT * FROM analise_credito_db.dbo.informacoes_clientes order by datahora_registro DESC ;
 
--- Cria a tabela 'registro_solicitacoes_kafka', se ela não existir.
+-- Cria a tabela 'registro_solicitacoes_kafka'
 
 CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
     id INT IDENTITY(1,1) PRIMARY KEY,
@@ -37,16 +37,9 @@ CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
 	kafka_consumer_id VARCHAR(50),
 	kafka_offset INT,
 	kafka_partition INT,
-	kafka_timestamp BIGINT,
+	kafka_timestamp DATETIME,
 	kafka_topic VARCHAR(50),
-	datahora_registro DATETIME DEFAULT GETDATE(),
-    FOREIGN KEY (id_solicitacao) REFERENCES informacoes_clientes(id_solicitacao)
+	datahora_registro DATETIME DEFAULT GETDATE()
 );
 
 -- SELECT * FROM analise_credito_db.dbo.registro_solicitacoes_kafka;
-
-
-
-
-
-
