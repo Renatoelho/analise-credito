@@ -43,3 +43,41 @@ CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
 );
 
 -- SELECT * FROM analise_credito_db.dbo.registro_solicitacoes_kafka;
+
+-- Cria a tabela 'resultados_analise_credito'
+
+CREATE TABLE analise_credito_db.dbo.resultados_analise_credito (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    id_resultado VARCHAR(20),
+    id_solicitacao VARCHAR(20),
+    resultado VARCHAR(10),
+    porcentagem_aprovada  DECIMAL(18, 2),
+    juros  DECIMAL(18, 2),
+    prazo INT,
+    valor_parcela  DECIMAL(18, 2),
+	datahora_registro DATETIME DEFAULT GETDATE()
+);
+
+
+-- SELECT * FROM analise_credito_db.dbo.resultados_analise_credito;
+
+
+-- Cria a tabela 'registro_entrega_analise_credito'
+
+CREATE TABLE analise_credito_db.dbo.registro_entrega_analise_credito (
+    id INT IDENTITY(1,1) PRIMARY KEY,
+    id_resultado VARCHAR(20),
+    id_solicitacao VARCHAR(20),
+    tamanho_mensagem INT,
+    status_retorno_motor INT,
+    mensagem_retorno_motor VARCHAR(20),
+    kafka_consumer_id VARCHAR(100),
+    kafka_committed VARCHAR(20),
+    kafka_offset INT,
+    kafka_partition INT,
+    kafka_timestamp DATETIME,
+    kafka_topic_origin VARCHAR(100),
+	datahora_registro DATETIME DEFAULT GETDATE()
+);
+
+-- SELECT * FROM analise_credito_db.dbo.registro_entrega_analise_credito;
