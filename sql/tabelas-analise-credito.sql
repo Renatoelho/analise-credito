@@ -1,11 +1,11 @@
 
--- Cria database para o fluxo de análise de crédito
+-- # Cria database para o fluxo de análise de crédito
 
 CREATE DATABASE analise_credito_db;
 
--- Cria a tabela 'informacoes_clientes'
+-- # Cria a tabela 'registro_informacoes_cliente'
 
-CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
+CREATE TABLE analise_credito_db.dbo.registro_informacoes_cliente (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
     id_regional VARCHAR(20),
@@ -27,11 +27,11 @@ CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
     datahora_registro DATETIME DEFAULT GETDATE()
 );
 
--- SELECT * FROM analise_credito_db.dbo.informacoes_clientes order by datahora_registro DESC ;
+-- SELECT * FROM analise_credito_db.dbo.registro_informacoes_cliente order by datahora_registro DESC ;
 
--- Cria a tabela 'registro_solicitacoes_kafka'
+-- # Cria a tabela 'registro_solicitacoes_analise_credito'
 
-CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
+CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
 	kafka_consumer_id VARCHAR(50),
@@ -42,15 +42,15 @@ CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
 	datahora_registro DATETIME DEFAULT GETDATE()
 );
 
--- SELECT * FROM analise_credito_db.dbo.registro_solicitacoes_kafka;
+-- SELECT * FROM analise_credito_db.dbo.registro_solicitacoes_analise_credito;
 
--- Cria a tabela 'resultados_analise_credito'
+-- # Cria a tabela 'registro_resultados_analise_credito'
 
-CREATE TABLE analise_credito_db.dbo.resultados_analise_credito (
+CREATE TABLE analise_credito_db.dbo.registro_resultados_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_resultado VARCHAR(20),
     id_solicitacao VARCHAR(20),
-    resultado VARCHAR(10),
+    resultado VARCHAR(20),
     porcentagem_aprovada  DECIMAL(18, 2),
     juros  DECIMAL(18, 2),
     prazo INT,
@@ -59,12 +59,12 @@ CREATE TABLE analise_credito_db.dbo.resultados_analise_credito (
 );
 
 
--- SELECT * FROM analise_credito_db.dbo.resultados_analise_credito;
+-- SELECT * FROM analise_credito_db.dbo.registro_resultados_analise_credito;
 
 
--- Cria a tabela 'registro_entrega_analise_credito'
+-- # Cria a tabela 'registro_entregas_analise_credito'
 
-CREATE TABLE analise_credito_db.dbo.registro_entrega_analise_credito (
+CREATE TABLE analise_credito_db.dbo.registro_entregas_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_resultado VARCHAR(20),
     id_solicitacao VARCHAR(20),
@@ -80,4 +80,30 @@ CREATE TABLE analise_credito_db.dbo.registro_entrega_analise_credito (
 	datahora_registro DATETIME DEFAULT GETDATE()
 );
 
--- SELECT * FROM analise_credito_db.dbo.registro_entrega_analise_credito;
+-- SELECT * FROM analise_credito_db.dbo.registro_entregas_analise_credito;
+
+
+-- # Tempo para analisar o crédito
+
+SELECT 	t2.id_solicitacao,
+		t2.regiao,
+		t3.resultado,
+		t1.kafka_timestamp, 
+		t4.kafka_timestamp,
+		t1.datahora_registro ,
+		t4.datahora_registro,
+		DATEDIFF(second, t1.kafka_timestamp , t4.kafka_timestamp) tempo_analise_externo,
+		DATEDIFF(second, t1.datahora_registro  , t4.datahora_registro) tempo_analise_interno
+FROM analise_credito_db.dbo.registro_solicitacoes_analise_credito t1
+INNER JOIN analise_credito_db.dbo.registro_informacoes_cliente t2
+ON t1.id_solicitacao = t2.id_solicitacao
+INNER JOIN analise_credito_db.dbo.registro_resultados_analise_credito t3
+ON t1.id_solicitacao  = t2.id_solicitacao
+INNER JOIN analise_credito_db.dbo.registro_entregas_analise_credito t4
+ON t1.id_solicitacao = t4.id_solicitacao;
+-- WHERE t1.datahora_registro  >= '2023-06-02 04:56:00';
+
+
+
+
+

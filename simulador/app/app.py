@@ -43,9 +43,10 @@ async def exemplo():
 @app.post("/motor-analise-credito")
 async def motor_analise_credito(motor: Motor):
     try:
+        # ***IMPORTANTE***: lembrece de usar o 'motor.informacoes_cliente.valor_solicitado' para calcular as parcelas
         _info_origem = {"id_solicitacao": motor.id_solicitacao}
         _informacoes_resultado_analise = {
-            "resultado": "True", #Criar função
+            "resultado": "APROVADO", #Criar função *** vamos usar os domínios APROVADO ou REPROVADO
             "porcentagem_aprovada": 90.0 #Criar função
         }
         _opcoes_parcelas = [

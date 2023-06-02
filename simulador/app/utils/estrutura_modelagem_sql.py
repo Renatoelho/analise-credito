@@ -17,7 +17,7 @@ CREATE DATABASE analise_credito_db;
 """
 
 query_cria_tabela1 = """
-CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
+CREATE TABLE analise_credito_db.dbo.registro_informacoes_cliente (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
     id_regional VARCHAR(20),
@@ -41,7 +41,7 @@ CREATE TABLE analise_credito_db.dbo.informacoes_clientes (
 """
 
 query_cria_tabela2 = """
-CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
+CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
 	kafka_consumer_id VARCHAR(50),
@@ -54,11 +54,11 @@ CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_kafka (
 """
 
 query_cria_tabela3 = """
-CREATE TABLE analise_credito_db.dbo.resultados_analise_credito (
+CREATE TABLE analise_credito_db.dbo.registro_resultados_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_resultado VARCHAR(20),
     id_solicitacao VARCHAR(20),
-    resultado VARCHAR(10),
+    resultado VARCHAR(20),
     porcentagem_aprovada  DECIMAL(18, 2),
     juros  DECIMAL(18, 2),
     prazo INT,
@@ -68,7 +68,7 @@ CREATE TABLE analise_credito_db.dbo.resultados_analise_credito (
 """
 
 query_cria_tabela4 = """
-CREATE TABLE analise_credito_db.dbo.registro_entrega_analise_credito (
+CREATE TABLE analise_credito_db.dbo.registro_entregas_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_resultado VARCHAR(20),
     id_solicitacao VARCHAR(20),
