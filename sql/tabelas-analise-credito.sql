@@ -85,23 +85,21 @@ CREATE TABLE analise_credito_db.dbo.registro_entregas_analise_credito (
 
 -- # Tempo para analisar o crédito
 
-SELECT 	t2.id_solicitacao,
+SELECT 	DISTINCT
+		t2.id_solicitacao,
 		t2.regiao,
 		t3.resultado,
 		t1.kafka_timestamp, 
 		t4.kafka_timestamp,
-		t1.datahora_registro ,
-		t4.datahora_registro,
-		DATEDIFF(second, t1.kafka_timestamp , t4.kafka_timestamp) tempo_analise_externo,
-		DATEDIFF(second, t1.datahora_registro  , t4.datahora_registro) tempo_analise_interno
+		DATEDIFF(second, t1.kafka_timestamp , t4.kafka_timestamp) tempo_analise_segundos
 FROM analise_credito_db.dbo.registro_solicitacoes_analise_credito t1
 INNER JOIN analise_credito_db.dbo.registro_informacoes_cliente t2
 ON t1.id_solicitacao = t2.id_solicitacao
 INNER JOIN analise_credito_db.dbo.registro_resultados_analise_credito t3
-ON t1.id_solicitacao  = t2.id_solicitacao
+ON t1.id_solicitacao = t3.id_solicitacao
 INNER JOIN analise_credito_db.dbo.registro_entregas_analise_credito t4
 ON t1.id_solicitacao = t4.id_solicitacao;
--- WHERE t1.datahora_registro  >= '2023-06-02 04:56:00';
+-- WHERE t1.id_solicitacao = 'S2023060221042819378';
 
 
 
