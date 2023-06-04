@@ -44,11 +44,11 @@ query_cria_tabela2 = """
 CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
-	kafka_consumer_id VARCHAR(50),
-	kafka_offset INT,
-	kafka_partition INT,
-	kafka_timestamp DATETIME,
-	kafka_topic VARCHAR(50),
+	id_consumer_kafka VARCHAR(50),
+	posicao_mensagem_kafka INT,
+	particao_mensagem_kafka INT,
+	datahora_solicitacao DATETIME2,
+	topico_kafka VARCHAR(50),
 	datahora_registro DATETIME DEFAULT GETDATE()
 );
 """
@@ -75,12 +75,8 @@ CREATE TABLE analise_credito_db.dbo.registro_entregas_analise_credito (
     tamanho_mensagem INT,
     status_retorno_motor INT,
     mensagem_retorno_motor VARCHAR(20),
-    kafka_consumer_id VARCHAR(100),
-    kafka_committed VARCHAR(20),
-    kafka_offset INT,
-    kafka_partition INT,
-    kafka_timestamp DATETIME,
-    kafka_topic_origin VARCHAR(100),
+    confirmacao_entrega VARCHAR(10),
+    datahora_entrega DATETIME2,
 	datahora_registro DATETIME DEFAULT GETDATE()
 );
 """
