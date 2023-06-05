@@ -24,9 +24,9 @@ Sou Analista de Big Data em uma grande multinacional de seguros. Tenho experiên
 
 + Gyan Lucas: 
 
-Sou Analista...
+Sou analista de processos com foco em dados em uma empresa de consórcios. Com especialização em Data Science, atuo na gestão e extração dos dados bem como na geração de insights de valor a empresa. Extensa experiência com SQL, Power BI, Power automate, Power Apps e VBA.
 
-[Linkedin do Gyan](https://www.../)
+[Linkedin do Gyan](https://www.linkedin.com/in/gyan-almeida-2102a8177)
 
 
 # Tópicos
