@@ -1,6 +1,6 @@
 # Análise de crédito em tempo real
 
-![Análise de Crédito em Tempo Real](simulador/app/docs/analise-credito-em-tempo-real.drawio.png)
+![Análise de Crédito em Tempo Real](docs/analise-credito-em-tempo-real.drawio.png)
 
 Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](#), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para resolver uma determinada hipótese.
 
