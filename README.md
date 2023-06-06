@@ -16,15 +16,15 @@ Além disso, utilizaremos o Jupyter Notebook como uma das principais ferramentas
 
 # Responsáveis pelo projeto
 
-+ Renato coelho:
++ *Renato coelho*
 
 Sou Analista de Big Data em uma grande multinacional de seguros. Tenho experiência na automatização de processos e estruturação de pipelines de dados. Também atuo como professor de tecnologia, compartilhando meu conhecimento em Linux, Data Lake, Python, Docker, Apache Nifi, Shell Script, SQL e expressões regulares. 
 
 [Linkedin do Renato](https://www.linkedin.com/in/renatoelho/)
 
-+ Gyan Lucas: 
++ *Gyan Lucas* 
 
-Sou analista de processos com foco em dados em uma empresa de consórcios. Com especialização em Data Science, atuo na gestão e extração dos dados bem como na geração de insights de valor a empresa. Extensa experiência com SQL, Power BI, Power automate, Power Apps e VBA.
+Sou Analista de Processos com foco em dados em uma empresa de consórcios. Com especialização em Data Science, atuo na gestão e extração dos dados bem como na geração de insights de valor a empresa. Extensa experiência com SQL, Power BI, Power automate, Power Apps e VBA.
 
 [Linkedin do Gyan](https://www.linkedin.com/in/gyan-almeida-2102a8177)
 
