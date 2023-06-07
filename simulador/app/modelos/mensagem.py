@@ -10,6 +10,7 @@ class InformacoesRegional(BaseModel):
     id_funcionario: str
     cidade: str
 
+
 class InformacoesCliente(BaseModel):
     cpf: str
     nome: str
@@ -22,6 +23,7 @@ class InformacoesCliente(BaseModel):
     renda_complementar: float
     profissao: str
     possui_outro_contrato: str
+
 
 class Mensagem(BaseModel):
     id_solicitacao: str

@@ -23,101 +23,120 @@ def _regiao_mais_ufs(regiao: str) -> dict:
         if regiao.strip() == list(item.keys())[0].strip():
             return item
 
+
 def id_identificacao() -> str:
     prefixo = "S"
     datahora = datetime.now().strftime("%Y%m%d%H%M%S")
     semente = "".join(sample(NUMEROS, 5))
     return f"{prefixo}{datahora}{semente}"
 
+
 regiao_extra = list(choice(REGIOES).keys())[0]
 regiao_mais_ufs = _regiao_mais_ufs(getenv("REGIAO", regiao_extra))
+
 
 def regiao(regiao_mais_ufs: dict) -> str:
     return list(regiao_mais_ufs.keys())[0]
 
+
 def uf(regiao_mais_ufs: dict) -> str:
     return sample(list(regiao_mais_ufs.values())[0], 1)[0]
 
+
 def id_regional(regiao: str, uf: str) -> str:
     return f"REG-{regiao}-{uf}".upper()
+
 
 def id_Representante(uf: str) -> str:
     semente = "".join(sample(NUMEROS, 7))
     return f"{uf}{semente}"
 
+
 def id_funcionario(uf: str) -> str:
     semente = "".join(sample(NUMEROS, 7))
     return f"F{uf}{semente}"
 
+
 def cidade() -> str:
     number_of_strings = 1
     for _ in range(number_of_strings):
-        length_of_string = choice(range(7,10))
+        len_string = choice(range(7, 10))
         _Cidade = (
-            "".join(choice(string.ascii_letters)
-            for _ in range(length_of_string))
+            "".join(choice(string.ascii_letters) for _ in range(len_string))
         )
     return _Cidade.title()
 
+
 def nome() -> str:
     listNomes = ["Nome"]
-    number_of_strings = choice(range(2,5))
+    number_of_strings = choice(range(2, 5))
     for _ in range(number_of_strings):
-        length_of_string = choice(range(3,10))
+        lstr = choice(range(3, 10))
         (
             listNomes
-            .append("".join(choice(string.ascii_letters)
-            for _ in range(length_of_string)))
+            .append("".join(choice(string.ascii_letters) for _ in range(lstr)))
         )
     _Nome = ""
     for item in listNomes:
         _Nome = f"{_Nome} {item}"
     return _Nome.title().strip()
 
+
 def gera_cpf() -> str:
     CPF = "".join(choice(string.digits) for _ in range(11))
     return CPF
 
+
 def mascara_cpf(cpf: str) -> str:
     return f"{cpf[:3]}.{cpf[3:6]}.{cpf[6:9]}-{cpf[9:]}"
+
 
 def sexo() -> str:
     return choice(["F", "M", "O"])
 
+
 def data_nascimento() -> str:
-    idade = choice(range(18,60))
-    dias = choice(range(1,365))
+    idade = choice(range(18, 60))
+    dias = choice(range(1, 365))
     hoje = date.today()
     td = timedelta(((idade * 365)*-1)+dias)
     data_nasc = hoje + td
     return data_nasc.strftime("%Y-%m-%d")
-     
+
+
 def estado_civil() -> str:
     return choice(ESTADO_CIVIL)
+
 
 def valor_solicitado() -> float:
     return float(f"{choice(VALOR_SOLICITADO)}.00")
 
+
 def nivel_ensino() -> str:
     return choice(NIVEL_ENSINO)
+
 
 def valor_renda() -> float:
     return float(f"{choice(VALOR_RENDA)}.00")
 
+
 def valor_renda_complementar() -> float:
     return float(f"{choice(VALOR_RENDA_COMPLEMENTAR)}.00")
+
 
 def profissao() -> str:
     return choice(PROFISSOES)
 
+
 def possui_outro_contrato() -> str:
-    return choice(["SIM","NAO"])
+    return choice(["SIM", "NAO"])
+
 
 def mensagem() -> dict:
     _regiao = regiao(regiao_mais_ufs)
     _uf = uf(regiao_mais_ufs)
 
-    _informacoes_regional =(
+    _informacoes_regional = (
         {
             "id_regional": id_regional(_regiao, _uf),
             "regiao": _regiao,
@@ -128,7 +147,7 @@ def mensagem() -> dict:
         }
     )
 
-    _informacoes_cliente =(
+    _informacoes_cliente = (
         {
             "cpf": mascara_cpf(gera_cpf()),
             "nome": nome(),
@@ -144,7 +163,7 @@ def mensagem() -> dict:
         }
     )
 
-    _conteudo_mensagem =(
+    _conteudo_mensagem = (
         {
             "id_solicitacao": id_identificacao(),
             "informacoes_regional": _informacoes_regional,
@@ -153,6 +172,7 @@ def mensagem() -> dict:
     )
 
     return Mensagem(**_conteudo_mensagem).dict()
+
 
 if __name__ == "__main__":
     _regiao = regiao(regiao_mais_ufs)

@@ -5,13 +5,14 @@ from fastapi.responses import JSONResponse
 
 from modelos.motor import Motor
 from modelos.resultado import Resultado
-from modelos.resultado import OpcoesParcelas
+from utils.motor_analise_credito import processamento_motor
 from utils.gerador_de_mensagens import mensagem
 from utils.produtor_de_mensagens import publica_mensagem
 from utils.estrutura_modelagem_sql import execute_query
 
 
 app = FastAPI()
+
 
 @app.get("/healthcheck-regionais")
 async def check_regionais():
@@ -24,6 +25,7 @@ async def check_regionais():
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)
 
+
 @app.get("/healthcheck-motor")
 async def check_motor():
     try:
@@ -31,6 +33,7 @@ async def check_motor():
     except Exception as erro:
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)
+
 
 @app.get("/exemplo")
 async def exemplo():
@@ -40,42 +43,15 @@ async def exemplo():
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)
 
+
 @app.post("/motor-analise-credito")
 async def motor_analise_credito(motor: Motor):
     try:
-        # ***IMPORTANTE***: lembrece de usar o 'motor.informacoes_cliente.valor_solicitado' para calcular as parcelas
-        _info_origem = {"id_solicitacao": motor.id_solicitacao}
-        _informacoes_resultado_analise = {
-            "resultado": "APROVADO", #Criar função *** vamos usar os domínios APROVADO ou REPROVADO
-            "porcentagem_aprovada": 90.0 #Criar função
-        }
-        _opcoes_parcelas = [
-            {
-                "valor_parcela": 1000.0, #Criar função
-                "prazo": 120, #Criar função
-                "juros": 0.0 #Criar função
-            },
-            {
-                "valor_parcela": 900.0, ##Criar função
-                "prazo": 110, #Criar função
-                "juros": 0.8 #Criar função
-            },
-            {
-                "valor_parcela": 500.0, #Criar função
-                "prazo": 150, #Criar função
-                "juros": 0.6 #Criar função
-            }
-        ]
-        _estrutura_resultado = {
-            "id_resultado": "R2023051621095197012", #Criar função
-            "info_origem": _info_origem,
-            "informacoes_resultado_analise": _informacoes_resultado_analise,
-            "opcoes_parcelas": OpcoesParcelas(opcoes_parcelas=_opcoes_parcelas)             
-        }
-
-        estrutura_resultado = Resultado(**_estrutura_resultado)
-
-        return JSONResponse(status_code=200, content=estrutura_resultado.dict())
+        estrutura_resultado = Resultado(**processamento_motor(motor))
+        return JSONResponse(
+            status_code=200,
+            content=estrutura_resultado.dict()
+        )
     except Exception as erro:
         erro = f"Ocorreu o seguinte erro no servidor: {erro}"
         return JSONResponse(status_code=500, content=erro)

@@ -4,11 +4,11 @@ ALFABETO = "qwertyuiopasdfghjklçzxcvbnm"
 NUMEROS = "0123456789"
 
 REGIOES = [
-    {"Centro_Oeste": ["DF","GO","MT","MS"]},
-    {"Nordeste": ["AL","BA","CE","MA","PB","PE","PI","RN","SE"]},
-    {"Norte": ["AC","AP","AM","PA","RO","RR","TO"]},
-    {"Sudeste": ["ES","MG","RJ","SP"]},
-    {"Sul": ["PR","RS","SC"]}
+    {"Centro_Oeste": ["DF", "GO", "MT", "MS"]},
+    {"Nordeste": ["AL", "BA", "CE", "MA", "PB", "PE", "PI", "RN", "SE"]},
+    {"Norte": ["AC", "AP", "AM", "PA", "RO", "RR", "TO"]},
+    {"Sudeste": ["ES", "MG", "RJ", "SP"]},
+    {"Sul": ["PR", "RS", "SC"]}
 ]
 
 ESTADO_CIVIL = [

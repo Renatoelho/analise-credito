@@ -44,12 +44,12 @@ query_cria_tabela2 = """
 CREATE TABLE analise_credito_db.dbo.registro_solicitacoes_analise_credito (
     id INT IDENTITY(1,1) PRIMARY KEY,
     id_solicitacao VARCHAR(20),
-	id_consumer_kafka VARCHAR(50),
-	posicao_mensagem_kafka INT,
-	particao_mensagem_kafka INT,
-	datahora_solicitacao DATETIME2,
-	topico_kafka VARCHAR(50),
-	datahora_registro DATETIME DEFAULT GETDATE()
+    id_consumer_kafka VARCHAR(50),
+    posicao_mensagem_kafka INT,
+    particao_mensagem_kafka INT,
+    datahora_solicitacao DATETIME2,
+    topico_kafka VARCHAR(50),
+    datahora_registro DATETIME DEFAULT GETDATE()
 );
 """
 
@@ -63,7 +63,7 @@ CREATE TABLE analise_credito_db.dbo.registro_resultados_analise_credito (
     juros  DECIMAL(18, 2),
     prazo INT,
     valor_parcela  DECIMAL(18, 2),
-	datahora_registro DATETIME DEFAULT GETDATE()
+    datahora_registro DATETIME DEFAULT GETDATE()
 );
 """
 
@@ -77,9 +77,10 @@ CREATE TABLE analise_credito_db.dbo.registro_entregas_analise_credito (
     mensagem_retorno_motor VARCHAR(20),
     confirmacao_entrega VARCHAR(10),
     datahora_entrega DATETIME2,
-	datahora_registro DATETIME DEFAULT GETDATE()
+    datahora_registro DATETIME DEFAULT GETDATE()
 );
 """
+
 
 def _execute_query(query: str, ddl: bool = False) -> Union[list, bool]:
     try:
@@ -95,10 +96,12 @@ def _execute_query(query: str, ddl: bool = False) -> Union[list, bool]:
             resultado = cursor.fetchall()
             return resultado
     except Exception as _:
+        _ = _
         if ddl:
             return True
         else:
             return False
+
 
 def execute_query() -> bool:
     try:
@@ -115,4 +118,5 @@ def execute_query() -> bool:
             _execute_query(query_cria_tabela4, True)
         return True
     except Exception as _:
-        return False        
+        _ = _
+        return False

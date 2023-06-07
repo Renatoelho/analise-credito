@@ -24,4 +24,5 @@ def publica_mensagem(json_mensagem: dict) -> bool:
         produtor.send(kafka_topico, value=mensagem)
         return True
     except Exception as _:
+        _ = _
         return False
