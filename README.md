@@ -120,17 +120,17 @@ Em desenvolvimento...
 |Parâmetro         |Valor         |
 |------------------|--------------|
 |URL interna       |http://nifi-registry:18080/|
-|URL externa       |http://localhost:18080/|
+|URL externa       |http://localhost:18080/nifi-registry/|
 
 + SQL Server
 
 |Parâmetro         |Valor         |
 |------------------|--------------|
-|Usuário           |SA            |
-|Senha             ||
-|Host interno      ||
-|Host externo      ||
-|Porta             |1433          |
+|Usuário           |SA|
+|Senha             |b90bee3b63bf33fa9901f92e|
+|Host interno      |sqlserver|
+|Host externo      |localhost|
+|Porta             |1433|
 
 + MinIO
 
@@ -144,7 +144,73 @@ Em desenvolvimento...
 
 > ***Observação:*** A diferença entre Broker/Host/URL interno ou externo é que os internos são utilizados dentro da rede onde as aplicações estão sendo executadas, permitindo a comunicação entre elas. Já os externos são destinados aos usuários para que possam acessar as ferramentas a partir de seus computadores, onde as aplicações estão sendo executadas.
 
+### Clonando o repositório do projeto
 
+```bash
+git clone https://github.com/Renatoelho/analise-credito.git ‘analise-credito’
+```
+
+> ***Observação:*** Será criado um diretório chamado "análise-crédito" em seu computador, onde estarão todos os arquivos necessários para a implementação do projeto.
+
+### Construindo a imagem base das regionais
+
+Essa imagem é responsável por simular cada uma das regionais existentes no projeto. Quando ativadas, as postagens dos eventos que alimentarão o fluxo de análise de crédito serão iniciadas imediatamente.
+
+```bash
+cd analise-credito/simulador/
+```
+
+```bash
+docker build -f dockerfile -t imagem-base-simulador:0.0.1 .
+```
+
+```bash
+cd ..
+```
+
+> ***Observação***: Serão ativados 5 containers, cada um deles com um healthcheck ativo que monitorará a saúde de cada um. Para visualizar, utilize o comando ```docker ps -a``` e verifique a coluna status. 
+
+
+### Ativando todos os serviços do projeto
+
+Aqui estamos utilizando o docker-compose e a partir do arquivo ```docker-compose.yaml``` teremos um cluster com todas as tecnologias mencionadas acima, prontas para iniciar a análise de crédito em tempo real. No entanto, antes disso, faremos algumas configurações. 
+
+Execute o seguinte comando para iniciar as aplicações:
+
+```bash
+docker-compose -f docker-compose.yaml --compatibility up -d
+```
+
+
+### Ajustando as permissões do volumes docker
+
+Para manter os dados das aplicações que estamos utilizando, será criado o diretório ```volumes```. Nele, serão armazenados todos os dados do Apache NiFi, Apache NiFi Registry e SQL Server. As demais aplicações têm seus volumes gerenciados diretamente pelo Docker. Portanto, se após a ativação dos serviços você notar algum problema nas aplicações mencionadas aqui, cujos dados estão armazenados no diretório ```volumes```, faça o down de todos os serviços ativos, altere as permissões do diretório ```volumes``` e, em seguida, inicie novamente todos os serviços. 
+
+Execute a seguinte sequência de comandos:
+
++ Baixado os serviços
+
+```bash
+docker-compose -f docker-compose.yaml --compatibility down
+```
+
++ Alterando as permissões do diretório volumes
+
+```bash
+chmod -R 777 volumes/
+```
+
++ Ativando todos os serviços novamente
+
+```bash
+docker-compose -f docker-compose.yaml --compatibility up -d
+```
+
+Se tudo der certo, você verá todos os serviços em execução por meio do comando:
+
+```bash
+docker ps -a
+```
 
 # Referências<a name="referencias"></a>
 
