@@ -98,7 +98,52 @@ Em desenvolvimento...
 
 # Implementação<a name="implementacao"></a>
 
-Em desenvolvimento...
+### Credenciais de acesso às ferramentas
+
++ Apache Kafka
+
+|Parâmetro         |Valor         |
+|------------------|--------------| 
+|Broker interno/porta|kafka:9002    |
+|Broker externo/porta|localhost:9004|
+
++ Apache Nifi
+
+|Parâmetro         |Valor         |
+|------------------|--------------|
+|Usuário           |nifi          |
+|Senha             |mkYUQBJ9BBhc38RWa1p3E76xUR1rhYGR|
+|URL externa       |https://localhost:8443/nifi/|
+
++ Apache Nifi Registry
+
+|Parâmetro         |Valor         |
+|------------------|--------------|
+|URL interna       |http://nifi-registry:18080/|
+|URL externa       |http://localhost:18080/|
+
++ SQL Server
+
+|Parâmetro         |Valor         |
+|------------------|--------------|
+|Usuário           |SA            |
+|Senha             ||
+|Host interno      ||
+|Host externo      ||
+|Porta             |1433          |
+
++ MinIO
+
+|Parâmetro         |Valor         |
+|------------------|--------------|
+|Usuário           |admin|
+|Senha             |eO3RNPcKgWInlzPJuI08|
+|URL externa       |http://localhost:9001|
+|Access Key        |Definir manualmente\*\*|
+|Secret Key        |Definir manualmente\*\*|
+
+> ***Observação:*** A diferença entre Broker/Host/URL interno ou externo é que os internos são utilizados dentro da rede onde as aplicações estão sendo executadas, permitindo a comunicação entre elas. Já os externos são destinados aos usuários para que possam acessar as ferramentas a partir de seus computadores, onde as aplicações estão sendo executadas.
+
 
 
 # Referências<a name="referencias"></a>
