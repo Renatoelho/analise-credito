@@ -197,7 +197,7 @@ docker-compose -f docker-compose.yaml --compatibility down
 + Alterando as permissões do diretório volumes
 
 ```bash
-chmod -R 777 volumes/
+sudo chmod -R 777 volumes/
 ```
 
 + Ativando todos os serviços novamente
