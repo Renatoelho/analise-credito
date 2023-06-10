@@ -132,7 +132,7 @@ Em desenvolvimento...
 |Host externo      |localhost|
 |Porta             |1433|
 
-+ MinIO
++ MinIO<a name="minio-credenciais"></a>
 
 |Parâmetro         |Valor         |
 |------------------|--------------|
@@ -259,8 +259,24 @@ https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-cr
 
 Aí é só seguir os demais passos e clicar ***SAVE***.
 
-Pronto, tudo está correto agora. Vamos prosseguir com as últimas configurações.
+Pronto, tudo está correto agora. Vamos prosseguir com as próximas configurações.
 
+
+### Criando um Bucket e as Access Keys para backup na nuvem (MinIO/S3)
+
+1. ***Passo*** - Acesse o MinIO:
+
+http://localhost:9001/ - [Usuário e senha clique aqui...](#minio-credenciais)
+
+2. ***Passo*** - Crie um bucket chamado ```processamento-analise-credito``:
+
+***Buckets*** >> ***Create Bucket*** >> ***Dê o nome cita acima*** >> ***Create Bucket***
+
+3. ***Passo*** - Crie as chaves Access e Secret keys:
+
+***Access Keys*** >> ***Create Access Keys*** >> ***Create***
+
+Guarde o arquivo JSON com as chaves e também salve-as em um local seguro, pois as utilizaremos posteriormente.
 
 
 # Referências<a name="referencias"></a>
