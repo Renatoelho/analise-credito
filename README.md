@@ -122,7 +122,7 @@ Em desenvolvimento...
 |URL interna       |http://nifi-registry:18080/|
 |URL externa       |http://localhost:18080/nifi-registry/|
 
-+ SQL Server
++ SQL Server<a name="sqlserver-credenciais"></a>
 
 |Parâmetro         |Valor         |
 |------------------|--------------|
@@ -285,7 +285,38 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
 
 ## Configurando parâmetros, credenciais e controller services
 
-Em desenvolvimento...
+1. ***Passo*** - Ative o processo ```RECEBE SOLICITAÇÕES DE ANÁLISE```
+
+Esse processo é responsável por receber as mensagens enviadas pelas regionais, se estiver chegando as mensagens está tudo OK, caso contrário acesse suas configurações e veja se falta algo.
+
+2. ***Passo*** - Ative todos os controller services
+
++ Ativando o JsonTreeReader
+
+    - Volte para raiz do Nifi Flow
+    - Clique na engrenagem do lado esquerdo
+    - Clique na aba controller services 
+    - Na linha do JsonTreeReader clique no ícone do raio ‘Enable’
+    - Em seguida em ENABLE
+
++ Ativando o JsonTreeReader
+
+    - Acesse o flow RECEBE SOLICITAÇÕES DE ANÁLISE
+    - Clique na engrenagem do lado esquerdo
+    - Clique na aba controller services
+    - Na linha do SERVIDOR_SQL_SERVER_ANALISE_CREDITO clique no ícone da engrenagem
+    - Em seguida em PROPERTIES
+    - Em PASSWORD adicione para SQL Server que está em credenciais
+    - Clique em APLLY
+    - Clique no ícone do raio ‘Enable’
+    - Em seguida em ENABLE
+
+[Usuário e senha SQL Server clique aqui...](#sqlserver-credenciais)
+
+Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar os dados no banco de dados.
+
+3. ***Passo*** - Adicionando as Access keys para gravar backup na nuvem
+
 
 
 # Referências<a name="referencias"></a>
