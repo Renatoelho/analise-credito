@@ -289,23 +289,23 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
 
 + Ativando o JsonTreeReader
 
-- Volte para raiz do Nifi Flow
-- Clique na engrenagem do lado esquerdo
-- Clique na aba controller services 
-- Na linha do JsonTreeReader clique no ícone do raio ```ENABLE```
-- Em seguida em ```ENABLE```
+    - Volte para raiz do Nifi Flow
+    - Clique na engrenagem do lado esquerdo
+    - Clique na aba controller services 
+    - Na linha do JsonTreeReader clique no ícone do raio ```ENABLE```
+    - Em seguida em ```ENABLE```
 
 + Ativando o JsonTreeReader
 
-- Acesse o flow ```RECEBE SOLICITAÇÕES DE ANÁLISE```
-- Clique na engrenagem do lado esquerdo
-- Clique na aba controller services
-- Na linha do ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO``` clique no ícone da engrenagem
-- Em seguida em ```PROPERTIES```
-- Em ```PASSWORD``` adicione para SQL Server que está em credenciais
-- Clique em ```APLLY```
-- Clique no ícone do raio ```ENABLE```
-- Em seguida em ```ENABLE```
+    - Acesse o flow ```RECEBE SOLICITAÇÕES DE ANÁLISE```
+    - Clique na engrenagem do lado esquerdo
+    - Clique na aba controller services
+    - Na linha do ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO``` clique no ícone da engrenagem
+    - Em seguida em ```PROPERTIES```
+    - Em ```PASSWORD``` adicione para SQL Server que está em credenciais
+    - Clique em ```APLLY```
+    - Clique no ícone do raio ```ENABLE```
+    - Em seguida em ```ENABLE```
 
 [Usuário e senha SQL Server clique aqui...](#sqlserver-credenciais)
 
