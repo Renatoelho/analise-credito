@@ -215,9 +215,11 @@ docker ps --format "{{.ID}}\t{{.Names}}\t{{.Status}}"
 
 ## Protegendo nossos flows com o Apache Nifi Registry
 
-O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criado no Apache Nifi estejam seguros. Para isso siga os seguintes passos:
+O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criado no Apache Nifi estejam seguros. 
 
-Para acessar o Nifi e Nifi Registry use as seguintes URLs:
+Para isso siga os seguintes passos:
+
+Acesse o Apache Nifi e Apache Nifi Registry usando as seguintes URLs:
 
 + https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
 
@@ -230,11 +232,11 @@ Para acessar o Nifi e Nifi Registry use as seguintes URLs:
 
 - Em ***Bucket Name*** adicione ```bucket-flows-analise-credito``` e clique em ***CREATE***.
 
-2. ***Passo*** - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais):
+2. ***Passo*** - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais)
 
 ***Menu*** >> ***Controller Settings*** >> ***Registry Clients*** >> ***Add Registry Client***
 
-- Adicione em ***Name*** o mesmo nome do bucket criado no Registry ```bucket-flows-analise-credito``` 
+- Adicione em ***Name*** o mesmo nome do bucket criado no Apache Nifi Registry ```bucket-flows-analise-credito``` 
 
 - em ***Type*** escolha ```NifiRegistryFlowRegistryClient``` e clique em ***ADD***. 
 
@@ -251,7 +253,7 @@ Já temos um fluxo pronto com toda a inteligência e as regras de negócio imple
 
 https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
 
-2. ***Passo*** - Importe o template ```FLOW_PROCESSAMENTO_ANÁLISE_DE_CRÉDITO.xml``` que existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
+2. ***Passo*** - Importe o template ```FLOW_PROCESSAMENTO_ANÁLISE_DE_CRÉDITO.xml``` que existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi
 
 ***Botão direito do mouse*** >> ***Upload template*** >> ***Escolha template citado*** >> ***Clique em UPLOAD*** 
 
@@ -259,7 +261,7 @@ https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-cr
 
 ***Nas ferramentas da barra superior clique em Template*** >> ***Arraste para centro da tela*** >> ***Selecione o Template*** >> ***Clique em ADD***
 
-4. ***Passo*** - Versionando o flow recem importado:
+4. ***Passo*** - Versionando o flow recem importado
 
  ***Botão direito sobre o Flow*** >> ***Version*** >> ***Start Version Control***
 
@@ -273,11 +275,11 @@ Pronto, tudo está correto agora. Vamos prosseguir com as próximas configuraç�
 
 http://localhost:9001/ - [Usuário e senha clique aqui...](#minio-credenciais)
 
-2. ***Passo*** - Crie um bucket chamado ```processamento-analise-credito```:
+2. ***Passo*** - Crie um bucket chamado ```processamento-analise-credito```
 
 ***Buckets*** >> ***Create Bucket*** >> ***Dê o nome citado acima*** >> ***Create Bucket***
 
-3. ***Passo*** - Crie as chaves Access e Secret keys:
+3. ***Passo*** - Crie as chaves Access e Secret keys
 
 ***Access Keys*** >> ***Create Access Keys*** >> ***Download for import***>> ***Create***
 
