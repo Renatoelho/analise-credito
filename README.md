@@ -212,7 +212,6 @@ Se tudo der certo, você verá todos os serviços em execução por meio do coma
 docker ps -a
 ```
 
-
 ## Protegendo nossos flows com o Apache Nifi Registry
 
 O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criado no Apache Nifi estejam seguros. Para isso siga os seguintes passos:
@@ -228,13 +227,13 @@ Para acessar o Nifi e Nifi Registry use as seguintes URLs:
 
 ***Settings*** >> ***New bucket***
 
-- Em ***Bucket Name*** adicione 'bucket-flows-elt' e clique em ***CREATE***.
+- Em ***Bucket Name*** adicione 'bucket-flows-analise-credito' e clique em ***CREATE***.
 
 2. ***Passo*** - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais):
 
 ***Menu*** >> ***Controller Settings*** >> ***Registry Clients*** >> ***Add Registry Client***
 
-- Adicione em ***Name*** o mesmo nome do bucket criado no Registry 'bucket-flows-elt' 
+- Adicione em ***Name*** o mesmo nome do bucket criado no Registry 'bucket-flows-analise-credito' 
 
 - em ***Type*** escolha 'NifiRegistryFlowRegistryClient' e clique em ***ADD***. 
 
@@ -247,13 +246,19 @@ Agora seus Flows no Apache Nifi já podem ser versionados.
 
 Já temos um fluxo pronto com toda a inteligência e as regras de negócio implementadas. Será necessário apenas importá-lo como um template e, em seguida, versioná-lo, pois o Apache NiFi Registry já está configurado.
 
+1. ***Passo*** - Acesso ao Apache Nifi
+
 https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
 
-1. ***Passo*** - Importa o template existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
+2. ***Passo*** - Importa o template existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
 
 ***Botão direito do mouse*** >> ***Upload template*** >> ***Escolha template citado*** >> ***Clique em UPLOAD*** 
 
-2. ***Passo*** - Versionando o flow recem importado:
+3. ***Passo*** - Adicione o flow importado
+
+***Nas ferramentas clique em Template*** >> ***Arraste para centro da tela*** >> ***Selecione o Template*** >> ***Clique em ADD***
+
+4. ***Passo*** - Versionando o flow recem importado:
 
  ***Botão direito sobre o Flow*** >> ***Version*** >> ***Start Version Control***
 
@@ -261,22 +266,21 @@ Aí é só seguir os demais passos e clicar ***SAVE***.
 
 Pronto, tudo está correto agora. Vamos prosseguir com as próximas configurações.
 
-
 ## Criando um Bucket e as Access Keys para backup na nuvem (MinIO/S3)
 
-1. ***Passo*** - Acesse o MinIO:
+1. ***Passo*** - Acesse o MinIO
 
 http://localhost:9001/ - [Usuário e senha clique aqui...](#minio-credenciais)
 
-2. ***Passo*** - Crie um bucket chamado ```processamento-analise-credito``:
+2. ***Passo*** - Crie um bucket chamado ```processamento-analise-credito```:
 
-***Buckets*** >> ***Create Bucket*** >> ***Dê o nome cita acima*** >> ***Create Bucket***
+***Buckets*** >> ***Create Bucket*** >> ***Dê o nome citado acima*** >> ***Create Bucket***
 
 3. ***Passo*** - Crie as chaves Access e Secret keys:
 
-***Access Keys*** >> ***Create Access Keys*** >> ***Create***
+***Access Keys*** >> ***Create Access Keys*** >> ***Download for import***>> ***Create***
 
-Guarde o arquivo JSON com as chaves e também salve-as em um local seguro, pois as utilizaremos posteriormente.
+Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em um local seguro, pois as utilizaremos posteriormente.
 
 
 ## Configurando parâmetros, credenciais e controller services
