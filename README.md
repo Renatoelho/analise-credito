@@ -243,6 +243,24 @@ Para acessar o Nifi e Nifi Registry use as seguintes URLs:
 Agora seus Flows no Apache Nifi já podem ser versionados.
 
 
+### Importando o flow da análise de crédito
+
+Já temos um fluxo pronto com toda a inteligência e as regras de negócio implementadas. Será necessário apenas importá-lo como um template e, em seguida, versioná-lo, pois o Apache NiFi Registry já está configurado.
+
+https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
+
+1. ***Passo*** - Importa o template existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
+
+Botão direito do mouse >> upload template >> Escolha template citado >> Clique em UPLOAD 
+
+2. ***Passo*** - Versionando o flow recem importado:
+
+ Botão direito sobre o Flow >> Version >> Start Version Control
+
+Aí é só seguir os demais passos e clicar em SAVE.
+
+Pronto, tudo está correto agora. Vamos prosseguir com as últimas configurações.
+
 
 # Referências<a name="referencias"></a>
 
