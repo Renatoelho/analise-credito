@@ -320,7 +320,7 @@ Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar
 
 Pronto, agora todas as mensagens recebidas e os resultados das análises de crédito estão seguros em nossa nuvem. Aqui, como estamos em um ambiente local, estamos utilizando o MinIO. Para utilizar o S3 da AWS, basta alterar os apontamentos. Ah, pode ocorrer um aviso durante a execução, pois estamos utilizando uma API diferente do S3, mas os dados serão gravados da mesma maneira.
 
-### Colocando o Flow em execução
+## Colocando o Flow em execução
 
 1. ***Passo*** - Ative o processo ```RECEBE SOLICITAÇÕES DE ANÁLISE```
 
@@ -341,7 +341,13 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 
 Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
 
-# Monitorando e analisando os resultados da análise de crédito
+## Monitorando e analisando os resultados da análise de crédito
+
+1. ***Passo*** - Monitorando o resultado das análises de crédito
+
+Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADOS_....xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
+
+2. ***Passo*** - Visualizações com Jupyter Notebook
 
 Em desenvolvimento...
 
