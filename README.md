@@ -251,15 +251,16 @@ https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-cr
 
 1. ***Passo*** - Importa o template existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
 
-Botão direito do mouse >> upload template >> Escolha template citado >> Clique em UPLOAD 
+***Botão direito do mouse*** >> ***Upload template*** >> ***Escolha template citado*** >> ***Clique em UPLOAD*** 
 
 2. ***Passo*** - Versionando o flow recem importado:
 
- Botão direito sobre o Flow >> Version >> Start Version Control
+ ***Botão direito sobre o Flow*** >> ***Version*** >> ***Start Version Control***
 
-Aí é só seguir os demais passos e clicar em SAVE.
+Aí é só seguir os demais passos e clicar ***SAVE***.
 
 Pronto, tudo está correto agora. Vamos prosseguir com as últimas configurações.
+
 
 
 # Referências<a name="referencias"></a>
