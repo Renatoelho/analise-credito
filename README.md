@@ -301,8 +301,8 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
     - Clique na engrenagem do lado esquerdo
     - Clique na aba controller services
     - Na linha do ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO``` clique no ícone da engrenagem
-    - Em seguida em ```PROPERTIES```
-    - Em ```PASSWORD``` adicione para SQL Server que está em credenciais
+    - Em seguida clique em ```PROPERTIES```
+    - Em ```PASSWORD``` adicione a asenha para SQL Server que está em credenciais
     - Clique em ```APLLY```
     - Clique no ícone do raio ```ENABLE```
     - Em seguida em ```ENABLE```
@@ -311,13 +311,40 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
 
 Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar os dados no banco de dados.
 
-3. ***Passo*** - Adicionando as Access keys para gravar backup na nuvem
+2. ***Passo*** - Adicionando as Access keys para gravar backup na nuvem
+
+    - Vá no processo ```GRAVA OBJETO```
+    - Em seguida clique em ```PROPERTIES```
+    - Adicione em ```Access Key ID``` e ```Secret Access Key``` (Esas informações estão no arquivo ```credentials.json```)
+    - Clique em ```APLLY```
+
+Pronto, agora todas as mensagens recebidas e os resultados das análises de crédito estão seguros em nossa nuvem. Aqui, como estamos em um ambiente local, estamos utilizando o MinIO. Para utilizar o S3 da AWS, basta alterar os apontamentos. Ah, pode ocorrer um aviso durante a execução, pois estamos utilizando uma API diferente do S3, mas os dados serão gravados da mesma maneira.
 
 ### Colocando o Flow em execução
 
 1. ***Passo*** - Ative o processo ```RECEBE SOLICITAÇÕES DE ANÁLISE```
 
 Esse processo é responsável por receber as mensagens enviadas pelas regionais, se estiver chegando as mensagens está tudo OK, caso contrário acesse suas configurações e veja se falta algo.
+
+2. ***Passo*** - Testando o motor da análise de crédito
+
+    - Ative o processo ```ATUALIZA METADADOS SOLICITAÇÃO```
+    - No processo ```MOTOR ANÁLISE``` clique com botão direito do mouse e em seguida em ```Run Once```
+
+Com isso, estamos realizando nossa primeira análise de crédito apenas para garantir que tudo está funcionando corretamente com o motor.
+
+    - No conector ```Response``` em seguida clique em com botão direito do mouse e em ```List queue```
+    - No popup clique no ícone do olho ```View content``` vai abrir uma nova aba que vai apresentar o resultado da nossa primeira análise de crédito.
+
+3. ***Passo*** - Ativando todo o Flow
+
+    - Redimensione a visão do Flow, clique em alguma parte em branco e com o botão direito do mouse clique em ```Play```.
+
+Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
+
+# Monitorando e analisando os resultados da análise de crédito
+
+Em desenvolvimento...
 
 
 # Referências<a name="referencias"></a>
