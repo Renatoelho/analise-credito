@@ -287,15 +287,15 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
 
 1. ***Passo*** - Ative todos os controller services
 
-+ Ativando o JsonTreeReader
++ Ativando o ```JsonTreeReader```
 
     - Volte para raiz do Nifi Flow
     - Clique na engrenagem do lado esquerdo
     - Clique na aba controller services 
-    - Na linha do JsonTreeReader clique no ícone do raio ```ENABLE```
+    - Na linha do ```JsonTreeReader``` clique no ícone do raio ```ENABLE```
     - Em seguida em ```ENABLE```
 
-+ Ativando o JsonTreeReader
++ Ativando o ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO```
 
     - Acesse o flow ```RECEBE SOLICITAÇÕES DE ANÁLISE```
     - Clique na engrenagem do lado esquerdo
@@ -315,7 +315,7 @@ Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar
 
     - Vá no processo ```GRAVA OBJETO```
     - Em seguida clique em ```PROPERTIES```
-    - Adicione em ```Access Key ID``` e ```Secret Access Key``` (Esas informações estão no arquivo ```credentials.json```)
+    - Adicione em ```Access Key ID``` e ```Secret Access Key``` (Essas informações estão no arquivo ```credentials.json```)
     - Clique em ```APLLY```
 
 Pronto, agora todas as mensagens recebidas e os resultados das análises de crédito estão seguros em nossa nuvem. Aqui, como estamos em um ambiente local, estamos utilizando o MinIO. Para utilizar o S3 da AWS, basta alterar os apontamentos. Ah, pode ocorrer um aviso durante a execução, pois estamos utilizando uma API diferente do S3, mas os dados serão gravados da mesma maneira.
@@ -330,15 +330,14 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 
     - Ative o processo ```ATUALIZA METADADOS SOLICITAÇÃO```
     - No processo ```MOTOR ANÁLISE``` clique com botão direito do mouse e em seguida em ```Run Once```
-
-Com isso, estamos realizando nossa primeira análise de crédito apenas para garantir que tudo está funcionando corretamente com o motor.
-
     - No conector ```Response``` em seguida clique em com botão direito do mouse e em ```List queue```
     - No popup clique no ícone do olho ```View content``` vai abrir uma nova aba que vai apresentar o resultado da nossa primeira análise de crédito.
 
+    Com isso, estamos realizando nossa primeira análise de crédito apenas para garantir que tudo está funcionando corretamente com o motor.
+
 3. ***Passo*** - Ativando todo o Flow
 
-    - Redimensione a visão do Flow, clique em alguma parte em branco e com o botão direito do mouse clique em ```Play```.
+    - Redimensione a visão do Flow, clique em alguma parte em branco e com o botão direito do mouse clique em ```Start```.
 
 Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
 
