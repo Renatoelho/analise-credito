@@ -302,14 +302,14 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
     - Clique na aba controller services
     - Na linha do ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO``` clique no ícone da engrenagem
     - Em seguida clique em ```PROPERTIES```
-    - Em ```PASSWORD``` adicione a asenha para SQL Server que está em credenciais
+    - Em ```PASSWORD``` adicione a senha para SQL Server que está em credenciais
     - Clique em ```APLLY```
     - Clique no ícone do raio ```ENABLE```
     - Em seguida em ```ENABLE```
 
 [Usuário e senha SQL Server clique aqui...](#sqlserver-credenciais)
 
-Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar os dados no banco de dados.
+Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar os dados no banco de dados. 
 
 2. ***Passo*** - Adicionando as Access keys para gravar backup na nuvem
 
