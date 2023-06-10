@@ -98,7 +98,7 @@ Em desenvolvimento...
 
 # Implementação<a name="implementacao"></a>
 
-### Credenciais de acesso às ferramentas
+## Credenciais de acesso às ferramentas
 
 + Apache Kafka
 
@@ -144,7 +144,7 @@ Em desenvolvimento...
 
 > ***Observação:*** A diferença entre Broker/Host/URL interno ou externo é que os internos são utilizados dentro da rede onde as aplicações estão sendo executadas, permitindo a comunicação entre elas. Já os externos são destinados aos usuários para que possam acessar as ferramentas a partir de seus computadores, onde as aplicações estão sendo executadas.
 
-### Clonando o repositório do projeto
+## Clonando o repositório do projeto
 
 ```bash
 git clone https://github.com/Renatoelho/analise-credito.git ‘analise-credito’
@@ -152,7 +152,7 @@ git clone https://github.com/Renatoelho/analise-credito.git ‘analise-credito�
 
 > ***Observação:*** Será criado um diretório chamado "análise-crédito" em seu computador, onde estarão todos os arquivos necessários para a implementação do projeto.
 
-### Construindo a imagem base das regionais
+## Construindo a imagem base das regionais
 
 Essa imagem é responsável por simular cada uma das regionais existentes no projeto. Quando ativadas, as postagens dos eventos que alimentarão o fluxo de análise de crédito serão iniciadas imediatamente.
 
@@ -171,7 +171,7 @@ cd ..
 > ***Observação***: Serão ativados 5 containers, cada um deles com um healthcheck ativo que monitorará a saúde de cada um. Para visualizar, utilize o comando ```docker ps -a``` e verifique a coluna status. 
 
 
-### Ativando todos os serviços do projeto
+## Ativando todos os serviços do projeto
 
 Aqui estamos utilizando o docker-compose e a partir do arquivo ```docker-compose.yaml``` teremos um cluster com todas as tecnologias mencionadas acima, prontas para iniciar a análise de crédito em tempo real. No entanto, antes disso, faremos algumas configurações. 
 
@@ -182,7 +182,7 @@ docker-compose -f docker-compose.yaml --compatibility up -d
 ```
 
 
-### Ajustando as permissões do volumes docker
+## Ajustando as permissões do volumes docker
 
 Para manter os dados das aplicações que estamos utilizando, será criado o diretório ```volumes```. Nele, serão armazenados todos os dados do Apache NiFi, Apache NiFi Registry e SQL Server. As demais aplicações têm seus volumes gerenciados diretamente pelo Docker. Portanto, se após a ativação dos serviços você notar algum problema nas aplicações mencionadas aqui, cujos dados estão armazenados no diretório ```volumes```, faça o down de todos os serviços ativos, altere as permissões do diretório ```volumes``` e, em seguida, inicie novamente todos os serviços. 
 
@@ -213,7 +213,7 @@ docker ps -a
 ```
 
 
-### Protegendo nossos flows com o Apache Nifi Registry
+## Protegendo nossos flows com o Apache Nifi Registry
 
 O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criado no Apache Nifi estejam seguros. Para isso siga os seguintes passos:
 
@@ -243,7 +243,7 @@ Para acessar o Nifi e Nifi Registry use as seguintes URLs:
 Agora seus Flows no Apache Nifi já podem ser versionados.
 
 
-### Importando o flow da análise de crédito
+## Importando o flow da análise de crédito
 
 Já temos um fluxo pronto com toda a inteligência e as regras de negócio implementadas. Será necessário apenas importá-lo como um template e, em seguida, versioná-lo, pois o Apache NiFi Registry já está configurado.
 
@@ -262,7 +262,7 @@ Aí é só seguir os demais passos e clicar ***SAVE***.
 Pronto, tudo está correto agora. Vamos prosseguir com as próximas configurações.
 
 
-### Criando um Bucket e as Access Keys para backup na nuvem (MinIO/S3)
+## Criando um Bucket e as Access Keys para backup na nuvem (MinIO/S3)
 
 1. ***Passo*** - Acesse o MinIO:
 
@@ -279,7 +279,7 @@ http://localhost:9001/ - [Usuário e senha clique aqui...](#minio-credenciais)
 Guarde o arquivo JSON com as chaves e também salve-as em um local seguro, pois as utilizaremos posteriormente.
 
 
-### Configurando parâmetros, credenciais e controller services
+## Configurando parâmetros, credenciais e controller services
 
 Em desenvolvimento...
 
