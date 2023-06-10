@@ -107,7 +107,7 @@ Em desenvolvimento...
 |Broker interno/porta|kafka:9002    |
 |Broker externo/porta|localhost:9004|
 
-+ Apache Nifi
++ Apache Nifi <a name="apache-nifi-credenciais"></a>
 
 |Parâmetro         |Valor         |
 |------------------|--------------|
@@ -115,7 +115,7 @@ Em desenvolvimento...
 |Senha             |mkYUQBJ9BBhc38RWa1p3E76xUR1rhYGR|
 |URL externa       |https://localhost:8443/nifi/|
 
-+ Apache Nifi Registry
++ Apache Nifi Registry<a name="apache-nifi-registry-credenciais"></a>
 
 |Parâmetro         |Valor         |
 |------------------|--------------|
@@ -211,6 +211,31 @@ Se tudo der certo, você verá todos os serviços em execução por meio do coma
 ```bash
 docker ps -a
 ```
+
+
+### Protegendo nossos flows com o Apache Nifi Registry
+
+O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criado no Apache Nifi estejam seguros. Para isso siga os seguintes passos:
+
+Para acessar o Nifi e Nifi Registry use as seguintes URLs:
+
++ https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
+
++ http://localhost:18080/nifi-registry/ - [Informações de acesso clieque aqui...](#apache-nifi-registry-credenciais)
+
+
+1. Passo - acesse o [Registry](http://localhost:18080/nifi-registry/) e crie um bucket
+
+***Settings*** >> ***New bucket***
+
+Em ***Bucket Name*** adicione 'bucket-flows-elt' e clique em ***CREATE***.
+
+2. Passo - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais):
+
+***Menu*** >> ***Controller Settings*** >> ***Registry Clients*** >> ***Add Registry Client***
+
+Adicione em ***Name*** o mesmo nome do bucket criado no Registry 'bucket-flows-elt' em ***Type*** escolha 'NifiRegistryFlowRegistryClient' e clique em ***ADD***. Em seguida acesse novamente e clique em ***Edit*** e adicione na aba ***PROPERTIES*** a URL: http://nifi-registry:18080/ clique em ***UPDATE*** e tudo pronto. Agora seus Flows no Apache Nifi já podem ser versionados.
+
 
 # Referências<a name="referencias"></a>
 
