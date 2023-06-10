@@ -279,6 +279,11 @@ http://localhost:9001/ - [Usuário e senha clique aqui...](#minio-credenciais)
 Guarde o arquivo JSON com as chaves e também salve-as em um local seguro, pois as utilizaremos posteriormente.
 
 
+### Configurando parâmetros, credenciais e controller services
+
+Em desenvolvimento...
+
+
 # Referências<a name="referencias"></a>
 
 Apache/Nifi, ***Docker Hub***. Disponível em: <https://hub.docker.com/r/apache/nifi>. Acesso em: 19 abr. 2023.
