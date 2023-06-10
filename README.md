@@ -128,6 +128,7 @@ Em desenvolvimento...
 |------------------|--------------|
 |Usuário           |SA|
 |Senha             |b90bee3b63bf33fa9901f92e|
+|Database          |analise_credito_db|
 |Host interno      |sqlserver|
 |Host externo      |localhost|
 |Porta             |1433|
@@ -147,7 +148,7 @@ Em desenvolvimento...
 ## Clonando o repositório do projeto
 
 ```bash
-git clone https://github.com/Renatoelho/analise-credito.git ‘analise-credito’
+git clone https://github.com/Renatoelho/analise-credito.git analise-credito
 ```
 
 > ***Observação:*** Será criado um diretório chamado "análise-crédito" em seu computador, onde estarão todos os arquivos necessários para a implementação do projeto.
@@ -168,7 +169,7 @@ docker build -f dockerfile -t imagem-base-simulador:0.0.1 .
 cd ..
 ```
 
-> ***Observação***: Serão ativados 5 containers, cada um deles com um healthcheck ativo que monitorará a saúde de cada um. Para visualizar, utilize o comando ```docker ps -a``` e verifique a coluna status. 
+> ***Observação***: Serão ativados 5 containers, cada um deles com um healthcheck ativo que monitorará a saúde de cada um. Para visualizar, utilize o comando ```docker ps``` e verifique a coluna status, isso depois que todos os serviços forem ativados. 
 
 
 ## Ativando todos os serviços do projeto
@@ -182,7 +183,7 @@ docker-compose -f docker-compose.yaml --compatibility up -d
 ```
 
 
-## Ajustando as permissões do volumes docker
+## Ajustando as permissões dos volumes docker
 
 Para manter os dados das aplicações que estamos utilizando, será criado o diretório ```volumes```. Nele, serão armazenados todos os dados do Apache NiFi, Apache NiFi Registry e SQL Server. As demais aplicações têm seus volumes gerenciados diretamente pelo Docker. Portanto, se após a ativação dos serviços você notar algum problema nas aplicações mencionadas aqui, cujos dados estão armazenados no diretório ```volumes```, faça o down de todos os serviços ativos, altere as permissões do diretório ```volumes``` e, em seguida, inicie novamente todos os serviços. 
 
@@ -209,7 +210,7 @@ docker-compose -f docker-compose.yaml --compatibility up -d
 Se tudo der certo, você verá todos os serviços em execução por meio do comando:
 
 ```bash
-docker ps -a
+docker ps --format "{{.ID}}\t{{.Names}}\t{{.Status}}"
 ```
 
 ## Protegendo nossos flows com o Apache Nifi Registry
@@ -220,22 +221,22 @@ Para acessar o Nifi e Nifi Registry use as seguintes URLs:
 
 + https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
 
-+ http://localhost:18080/nifi-registry/ - [Informações de acesso clieque aqui...](#apache-nifi-registry-credenciais)
++ http://localhost:18080/nifi-registry/ - [Informações de acesso clique aqui...](#apache-nifi-registry-credenciais)
 
 
-1. ***Passo*** - acesse o [Registry](http://localhost:18080/nifi-registry/) e crie um bucket
+1. ***Passo*** - acesse o [Apache Nifi Registry](http://localhost:18080/nifi-registry/) e crie um bucket
 
 ***Settings*** >> ***New bucket***
 
-- Em ***Bucket Name*** adicione 'bucket-flows-analise-credito' e clique em ***CREATE***.
+- Em ***Bucket Name*** adicione ```bucket-flows-analise-credito``` e clique em ***CREATE***.
 
 2. ***Passo*** - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais):
 
 ***Menu*** >> ***Controller Settings*** >> ***Registry Clients*** >> ***Add Registry Client***
 
-- Adicione em ***Name*** o mesmo nome do bucket criado no Registry 'bucket-flows-analise-credito' 
+- Adicione em ***Name*** o mesmo nome do bucket criado no Registry ```bucket-flows-analise-credito``` 
 
-- em ***Type*** escolha 'NifiRegistryFlowRegistryClient' e clique em ***ADD***. 
+- em ***Type*** escolha ```NifiRegistryFlowRegistryClient``` e clique em ***ADD***. 
 
 - Em seguida acesse novamente e clique em ***Edit*** e adicione na aba ***PROPERTIES*** a URL: http://nifi-registry:18080/ clique em ***UPDATE*** e tudo pronto. 
 
@@ -250,13 +251,13 @@ Já temos um fluxo pronto com toda a inteligência e as regras de negócio imple
 
 https://localhost:8443/nifi/ - [Usuário e senha clique aqui...](#apache-nifi-credenciais)
 
-2. ***Passo*** - Importa o template existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
+2. ***Passo*** - Importe o template ```FLOW_PROCESSAMENTO_ANÁLISE_DE_CRÉDITO.xml``` que existe no diretório flows, faça isso a partir da tela inicial do Apache Nifi:
 
 ***Botão direito do mouse*** >> ***Upload template*** >> ***Escolha template citado*** >> ***Clique em UPLOAD*** 
 
 3. ***Passo*** - Adicione o flow importado
 
-***Nas ferramentas clique em Template*** >> ***Arraste para centro da tela*** >> ***Selecione o Template*** >> ***Clique em ADD***
+***Nas ferramentas da barra superior clique em Template*** >> ***Arraste para centro da tela*** >> ***Selecione o Template*** >> ***Clique em ADD***
 
 4. ***Passo*** - Versionando o flow recem importado:
 
@@ -289,23 +290,23 @@ Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em 
 
 + Ativando o ```JsonTreeReader```
 
-    - Volte para raiz do Nifi Flow
-    - Clique na engrenagem do lado esquerdo
-    - Clique na aba controller services 
-    - Na linha do ```JsonTreeReader``` clique no ícone do raio ```ENABLE```
-    - Em seguida em ```ENABLE```
+    - Volte para raiz do Nifi Flow;
+    - Clique na engrenagem ```Configuration``` do lado esquerdo;
+    - Clique na aba ```CONTROLLER SERVICES```;
+    - Na linha do ```JsonTreeReader``` clique no ícone do raio ```ENABLE```;
+    - Em seguida em ```ENABLE```.
 
 + Ativando o ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO```
 
-    - Acesse o flow ```RECEBE SOLICITAÇÕES DE ANÁLISE```
-    - Clique na engrenagem do lado esquerdo
-    - Clique na aba controller services
-    - Na linha do ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO``` clique no ícone da engrenagem
-    - Em seguida clique em ```PROPERTIES```
-    - Em ```PASSWORD``` adicione a senha para SQL Server que está em credenciais
-    - Clique em ```APLLY```
-    - Clique no ícone do raio ```ENABLE```
-    - Em seguida em ```ENABLE```
+    - Acesse o flow ```PROCESSAMENTO ANÁLISE DE CRÉDITO```;
+    - Clique na engrenagem ```Configuration``` do lado esquerdo;
+    - Clique na aba ```CONTROLLER SERVICES```;
+    - Na linha do ```SERVIDOR_SQL_SERVER_ANALISE_CREDITO``` clique no ícone da engrenagem ```Configuration```;
+    - Em seguida clique em ```PROPERTIES```;
+    - Em ```Password``` adicione a senha para SQL Server que está em credenciais;
+    - Clique em ```APLLY```;
+    - Clique no ícone do raio ```ENABLE```;
+    - Em seguida em ```ENABLE```.
 
 [Usuário e senha SQL Server clique aqui...](#sqlserver-credenciais)
 
@@ -313,10 +314,10 @@ Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar
 
 2. ***Passo*** - Adicionando as Access keys para gravar backup na nuvem
 
-    - Vá no processo ```GRAVA OBJETO```
-    - Em seguida clique em ```PROPERTIES```
-    - Adicione em ```Access Key ID``` e ```Secret Access Key``` (Essas informações estão no arquivo ```credentials.json```)
-    - Clique em ```APLLY```
+    - Vá no processo ```GRAVA OBJETO```;
+    - Em seguida clique em ```PROPERTIES```;
+    - Adicione em ```Access Key ID``` e ```Secret Access Key``` (Essas informações estão no arquivo ```credentials.json```);
+    - Clique em ```APLLY```.
 
 Pronto, agora todas as mensagens recebidas e os resultados das análises de crédito estão seguros em nossa nuvem. Aqui, como estamos em um ambiente local, estamos utilizando o MinIO. Para utilizar o S3 da AWS, basta alterar os apontamentos. Ah, pode ocorrer um aviso durante a execução, pois estamos utilizando uma API diferente do S3, mas os dados serão gravados da mesma maneira.
 
@@ -328,9 +329,9 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 
 2. ***Passo*** - Testando o motor da análise de crédito
 
-    - Ative o processo ```ATUALIZA METADADOS SOLICITAÇÃO```
-    - No processo ```MOTOR ANÁLISE``` clique com botão direito do mouse e em seguida em ```Run Once```
-    - No conector ```Response``` em seguida clique em com botão direito do mouse e em ```List queue```
+    - Ative clicando em ```Start``` o processo ```ATUALIZA METADADOS SOLICITAÇÃO```;
+    - No processo ```MOTOR ANÁLISE``` clique com botão direito do mouse e em seguida em ```Run Once```;
+    - No conector ```Response``` em seguida clique em com botão direito do mouse e em ```List queue```;
     - No popup clique no ícone do olho ```View content``` vai abrir uma nova aba que vai apresentar o resultado da nossa primeira análise de crédito.
 
     Com isso, estamos realizando nossa primeira análise de crédito apenas para garantir que tudo está funcionando corretamente com o motor.
@@ -339,13 +340,13 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 
     - Redimensione a visão do Flow, clique em alguma parte em branco e com o botão direito do mouse clique em ```Start```.
 
-Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
+Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, ou no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
 
 ## Monitorando e analisando os resultados da análise de crédito
 
 1. ***Passo*** - Monitorando o resultado das análises de crédito
 
-Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADOS_....xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
+Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADOS.xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
 
 2. ***Passo*** - Visualizações com Jupyter Notebook
 
