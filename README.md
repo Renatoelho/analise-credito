@@ -224,17 +224,24 @@ Para acessar o Nifi e Nifi Registry use as seguintes URLs:
 + http://localhost:18080/nifi-registry/ - [Informações de acesso clieque aqui...](#apache-nifi-registry-credenciais)
 
 
-1. Passo - acesse o [Registry](http://localhost:18080/nifi-registry/) e crie um bucket
+1. ***Passo*** - acesse o [Registry](http://localhost:18080/nifi-registry/) e crie um bucket
 
 ***Settings*** >> ***New bucket***
 
-Em ***Bucket Name*** adicione 'bucket-flows-elt' e clique em ***CREATE***.
+    - Em ***Bucket Name*** adicione 'bucket-flows-elt' e clique em ***CREATE***.
 
-2. Passo - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais):
+2. ***Passo*** - Acesse o Apache Nifi - [URL, Usuário e senha clique aqui...](#apache-nifi-credenciais):
 
 ***Menu*** >> ***Controller Settings*** >> ***Registry Clients*** >> ***Add Registry Client***
 
-Adicione em ***Name*** o mesmo nome do bucket criado no Registry 'bucket-flows-elt' em ***Type*** escolha 'NifiRegistryFlowRegistryClient' e clique em ***ADD***. Em seguida acesse novamente e clique em ***Edit*** e adicione na aba ***PROPERTIES*** a URL: http://nifi-registry:18080/ clique em ***UPDATE*** e tudo pronto. Agora seus Flows no Apache Nifi já podem ser versionados.
+    - Adicione em ***Name*** o mesmo nome do bucket criado no Registry 'bucket-flows-elt' 
+
+    - em ***Type*** escolha 'NifiRegistryFlowRegistryClient' e clique em ***ADD***. 
+
+    - Em seguida acesse novamente e clique em ***Edit*** e adicione na aba ***PROPERTIES*** a URL: http://nifi-registry:18080/ clique em ***UPDATE*** e tudo pronto. 
+
+Agora seus Flows no Apache Nifi já podem ser versionados.
+
 
 
 # Referências<a name="referencias"></a>
