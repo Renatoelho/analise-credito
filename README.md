@@ -2,7 +2,7 @@
 
 ![Análise de crédito em tempo real](docs/analise-credito-em-tempo-real.drawio.png)
 
-Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para resolver uma determinada hipótese.
+Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para resolver essa questão.
 
 Nesse contexto, estamos propondo uma solução para processar análise de crédito "quase" em ***tempo real*** a partir de eventos gerados pelas regionais de uma hipotética grande empresa de concessão de crédito. A financeira XYZ S.A. tem abrangência em todo o território nacional e concentra todas as operações de análise de crédito em sua matriz, da qual recebe as solicitações de suas regionais, onde existem dezenas de representantes que comercializam seus produtos de crédito. Por alguma regra de negócio, cada uma das cinco regionais centraliza todas as solicitações de ***análise e concessão de crédito*** referente a sua regional. A solução proposta aqui captura os eventos de solicitação de crédito que são enviados para uma ferramenta de mensageria mantida pela matriz, e cada regional é responsável por enviar o evento para um tópico que, além de armazenar todos os metadados do processamento, inclui o processamento, a devolutiva dos resultados e o registro da confirmação da devolutiva.
 
@@ -10,9 +10,9 @@ O evento de origem passa por um "motor" de ***concessão de crédito*** que defi
 
 Ao final, o evento de resultado da análise será devolvido via ferramenta de mensageria para sua regional de origem, ficando a partir daí a regional responsável por dar continuidade a todo o processo.
 
-As ferramentas que vamos utilizar aqui são o Apache Kafka para gerenciar as mensagens/eventos postados, tanto para as solicitações quanto para os resultados das análises de crédito. O Apache Nifi será responsável por estruturar todo o fluxo de análise de crédito e orquestrar o recebimento, processamento e devolutiva. Além disso, temos o Apache Nifi Registry, que faz backup dos flows desenvolvidos no Apache Nifi. Para armazenar os metadados e dados dos processamentos, temos uma instância de SQL Server para análises mais avançadas. Para o armazenamento de dados em nuvem, optamos por utilizar o MinIO em vez do S3 para desenvolvimento local, pois ele nos oferece a flexibilidade e o controle necessários para testar diferentes cenários e configurações localmente.
+As ferramentas que vamos utilizar aqui são o ***Apache Kafka*** para gerenciar as mensagens/eventos postados, tanto para as solicitações quanto para os resultados das análises de crédito. O ***Apache Nifi*** será responsável por estruturar todo o fluxo de análise de crédito e orquestrar o recebimento, processamento e devolutiva. Além disso, temos o ***Apache Nifi Registry***, que faz backup dos flows desenvolvidos no Apache Nifi. Para armazenar os metadados e dados dos processamentos, temos uma instância de ***SQL Server*** para análises mais avançadas. Para o armazenamento de dados em nuvem, optamos por utilizar o ***MinIO*** em vez do S3 para desenvolvimento local, pois ele nos oferece a flexibilidade e o controle necessários para testar diferentes cenários e configurações localmente.
 
-Além disso, utilizaremos o Jupyter Notebook como uma das principais ferramentas de desenvolvimento e documentação. O Jupyter Notebook nos permite escrever e executar código de forma interativa, facilitando o processo de ***análise e monitoramento*** da nossa solução de análise de crédito.
+Além disso, utilizaremos o ***Jupyter Notebook*** como uma das principais ferramentas de desenvolvimento e documentação. O Jupyter Notebook nos permite escrever e executar código de forma interativa, facilitando o processo de análise e monitoramento da nossa solução de análise de crédito.
 
 # Responsáveis pelo projeto
 
@@ -139,6 +139,7 @@ Em desenvolvimento...
 |------------------|--------------|
 |Usuário           |admin|
 |Senha             |eO3RNPcKgWInlzPJuI08|
+|URL interna       |http://minio-s3:9000|
 |URL externa       |http://localhost:9001|
 |Access Key        |Definir manualmente\*\*|
 |Secret Key        |Definir manualmente\*\*|
