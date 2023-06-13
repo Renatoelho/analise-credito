@@ -90,6 +90,8 @@ O ***Docker Compose*** é uma ferramenta que permite que os usuários definam e 
 
 + Git 2.25.1 ou superior (Host)
 
+***Importante:*** Na implementação, todos os serviços consumiram aproximadamente 6 GB de RAM, portanto, é recomendado ter pelo menos 8 GB de memória em seu notebook/PC.
+
 
 # Apresentação em vídeo<a name="apresentacao-video"></a>
 
