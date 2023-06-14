@@ -154,6 +154,7 @@ Em desenvolvimento...
 |------------------|--------------|
 |URL externa       |http://localhost:19000|
 
+
 > ***Observação:*** A diferença entre Broker/Host/URL interno ou externo é que os internos são utilizados dentro da rede onde as aplicações estão sendo executadas, permitindo a comunicação entre elas. Já os externos são destinados aos usuários para que possam acessar as ferramentas a partir de seus computadores, onde as aplicações estão sendo executadas.
 
 
@@ -187,7 +188,7 @@ cd ..
 
 ## Construindo a imagem para visualização dos resultados
 
-Essa imagem é responsável por criar um serviço Streamlit no projeto. Quando ativada, todas as visualizações do processo de análise de crédito ficarão disponíveis na porta 19000 do seu notebook/PC.
+Essa imagem é responsável por criar um serviço ***Streamlit*** no projeto. Quando ativada, todas as visualizações do processo de análise de crédito ficarão disponíveis na porta ```19000``` do seu notebook/PC.
 
 ```bash
 cd analise-credito/streamlit/

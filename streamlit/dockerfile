@@ -54,7 +54,3 @@ EXPOSE 19000
 
 # Start da aplicação no servidor
 ENTRYPOINT systemctl start streamlit.service 
-
-
-# docker build -f dockerfile -t imagem-base-streamlit:0.0.1 .
-# docker run --rm -d -p 19000:19000 --name streamlit imagem-base-streamlit:0.0.1
