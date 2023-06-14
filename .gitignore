@@ -5,3 +5,4 @@
 /**/volumes
 /**/docker-compose-sqlserver.yaml
 /**/README-dev.md
+/**/docker-compose-sem-streamlit.yaml

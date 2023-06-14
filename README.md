@@ -2,7 +2,7 @@
 
 ![Análise de crédito em tempo real](docs/analise-credito-em-tempo-real.drawio.png)
 
-Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para resolver essa questão.
+Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para atender a esse propósito.
 
 Nesse contexto, estamos propondo uma solução para processar análise de crédito "quase" em ***tempo real*** a partir de eventos gerados pelas regionais de uma hipotética grande empresa de concessão de crédito. A financeira XYZ S.A. tem abrangência em todo o território nacional e concentra todas as operações de análise de crédito em sua matriz, da qual recebe as solicitações de suas regionais, onde existem dezenas de representantes que comercializam seus produtos de crédito. Por alguma regra de negócio, cada uma das cinco regionais centraliza todas as solicitações de ***análise e concessão de crédito*** referente a sua regional. A solução proposta aqui captura os eventos de solicitação de crédito que são enviados para uma ferramenta de mensageria mantida pela matriz, e cada regional é responsável por enviar o evento para um tópico que, além de armazenar todos os metadados do processamento, inclui o processamento, a devolutiva dos resultados e o registro da confirmação da devolutiva.
 
@@ -12,7 +12,8 @@ Ao final, o evento de resultado da análise será devolvido via ferramenta de me
 
 As ferramentas que vamos utilizar aqui são o ***Apache Kafka*** para gerenciar as mensagens/eventos postados, tanto para as solicitações quanto para os resultados das análises de crédito. O ***Apache Nifi*** será responsável por estruturar todo o fluxo de análise de crédito e orquestrar o recebimento, processamento e devolutiva. Além disso, temos o ***Apache Nifi Registry***, que faz backup dos flows desenvolvidos no Apache Nifi. Para armazenar os metadados e dados dos processamentos, temos uma instância de ***SQL Server*** para análises mais avançadas. Para o armazenamento de dados em nuvem, optamos por utilizar o ***MinIO*** em vez do S3 para desenvolvimento local, pois ele nos oferece a flexibilidade e o controle necessários para testar diferentes cenários e configurações localmente.
 
-Além disso, utilizaremos o ***Jupyter Notebook*** como uma das principais ferramentas de desenvolvimento e documentação. O Jupyter Notebook nos permite escrever e executar código de forma interativa, facilitando o processo de análise e monitoramento da nossa solução de análise de crédito.
+Além disso, utilizaremos o ***Streamlit*** que nos permite criar e executar aplicativos web interativos de forma rápida e fácil, facilitando o processo de análise e monitoramento da nossa solução de análise de crédito. 
+
 
 # Responsáveis pelo projeto
 
@@ -65,9 +66,9 @@ O ***Apache Nifi Registry*** é um subprojeto do Apache Nifi que fornece um repo
 O ***SQL Server*** é um sistema de gerenciamento de banco de dados relacional desenvolvido pela Microsoft, oferecendo uma plataforma completa para armazenar, consultar e gerenciar dados. Ele suporta a linguagem SQL e fornece recursos avançados, como transações ACID, controle de acesso e integridade referencial. O SQL Server também inclui ferramentas de ***administração*** e ***monitoramento*** para facilitar a gestão e o desempenho do banco de dados. Sua confiabilidade, segurança e escalabilidade o tornam uma escolha popular em empresas de diversos tamanhos.
 
 
-### Jupyter notebook
+### Streamlit
 
-O ***Jupyter Notebook*** é uma aplicação web que permite a criação de ***documentos interativos*** contendo código, texto e visualizações. É usado por cientistas de dados, pesquisadores e desenvolvedores para explorar e analisar dados, prototipar algoritmos e comunicar resultados. Com suporte a várias linguagens de programação, como Python e R, o Jupyter Notebook permite a execução de código em células individuais, tornando o processo de desenvolvimento iterativo e facilitando a experimentação. Além disso, oferece recursos de visualização de dados e integração com bibliotecas populares de ciência de dados. Sua interface intuitiva e flexível o torna uma ferramenta versátil e amplamente utilizada na comunidade de análise de dados.
+O ***Streamlit*** é uma biblioteca de código aberto para criação de aplicativos web interativos em Python de forma rápida e fácil. Ele permite que os desenvolvedores transformem seus scripts em aplicativos interativos com apenas algumas linhas de código. Com o Streamlit, é possível criar interfaces de usuário intuitivas, ***visualizações*** de dados interativas e ***painéis personalizados***, tudo diretamente no código Python. 
 
 
 ### Docker
@@ -99,6 +100,7 @@ Em desenvolvimento...
 
 
 # Implementação<a name="implementacao"></a>
+
 
 ## Credenciais de acesso às ferramentas
 
@@ -146,7 +148,14 @@ Em desenvolvimento...
 |Access Key        |Definir manualmente\*\*|
 |Secret Key        |Definir manualmente\*\*|
 
++ Streamlit<a name="streamlit-credenciais"></a>
+
+|Parâmetro         |Valor         |
+|------------------|--------------|
+|URL externa       |http://localhost:19000|
+
 > ***Observação:*** A diferença entre Broker/Host/URL interno ou externo é que os internos são utilizados dentro da rede onde as aplicações estão sendo executadas, permitindo a comunicação entre elas. Já os externos são destinados aos usuários para que possam acessar as ferramentas a partir de seus computadores, onde as aplicações estão sendo executadas.
+
 
 ## Clonando o repositório do projeto
 
@@ -155,6 +164,7 @@ git clone https://github.com/Renatoelho/analise-credito.git analise-credito
 ```
 
 > ***Observação:*** Será criado um diretório chamado "análise-crédito" em seu computador, onde estarão todos os arquivos necessários para a implementação do projeto.
+
 
 ## Construindo a imagem base das regionais
 
@@ -173,6 +183,23 @@ cd ..
 ```
 
 > ***Observação***: Serão ativados 5 containers, cada um deles com um healthcheck ativo que monitorará a saúde de cada um. Para visualizar, utilize o comando ```docker ps``` e verifique a coluna status, isso depois que todos os serviços forem ativados. 
+
+
+## Construindo a imagem para visualização dos resultados
+
+Essa imagem é responsável por criar um serviço Streamlit no projeto. Quando ativada, todas as visualizações do processo de análise de crédito ficarão disponíveis na porta 19000 do seu notebook/PC.
+
+```bash
+cd analise-credito/streamlit/
+```
+
+```bash
+docker build -f dockerfile -t imagem-base-streamlit:0.0.1 .
+```
+
+```bash
+cd ..
+```
 
 
 ## Ativando todos os serviços do projeto
@@ -326,6 +353,7 @@ Com isso, todos os processos que gravam no SQL Server estarão aptos a registrar
 
 Pronto, agora todas as mensagens recebidas e os resultados das análises de crédito estão seguros em nossa nuvem. Aqui, como estamos em um ambiente local, estamos utilizando o MinIO. Para utilizar o S3 da AWS, basta alterar os apontamentos. Ah, pode ocorrer um aviso durante a execução, pois estamos utilizando uma API diferente do S3, mas os dados serão gravados da mesma maneira.
 
+
 ## Colocando o Flow em execução
 
 1. ***Passo*** - Ative o processo ```RECEBE SOLICITAÇÕES DE ANÁLISE```
@@ -347,15 +375,18 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 
 Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, ou no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
 
+
 ## Monitorando e analisando os resultados da análise de crédito
 
 1. ***Passo*** - Monitorando o resultado das análises de crédito
 
 Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADOS.xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
 
-2. ***Passo*** - Visualizações com Jupyter Notebook
+2. ***Passo*** - Visualizações com Streamlit
 
-Em desenvolvimento...
+O Streamlit possibilitará a visualização de informações de monitoramento e execução do nosso processo de análise de crédito. Acesse o seguinte link para visualizar todos esses dados.
+
+http://localhost:19000/ ou [Clique aqui para ver as credencias de acesso...](#streamlit-credenciais)
 
 
 # Referências<a name="referencias"></a>
@@ -396,6 +427,6 @@ bitnami/zookeeper, ***Docker Hub***. Disponível em: <https://hub.docker.com/r/b
 
 Welcome to Apache ZooKeeper, ***Apache Zookeeper***. Disponível em: <https://min.io/>. Acesso em: 21 mai. 2023.
 
-Project Jupyter Documentation, ***Jupyter***. Disponível em: <https://docs.jupyter.org/en/latest/>. Acesso em: 05 jun. 2023.
+Streamlit documentation, ***Streamlit***. Disponível em: <https://docs.streamlit.io/>. Acesso em: 14 jun. 2023.
 
 Service unit configuration, ***systemd.service***. Disponível em: <https://www.freedesktop.org/software/systemd/man/systemd.service.html>. Acesso em: 05 jun. 2023.

@@ -283,6 +283,26 @@ services:
       - minio_certs:/certs
     networks:
       - rede-analise-credito
+  streamlit:
+    depends_on:
+      - kafka
+    hostname: streamlit
+    image: imagem-base-streamlit:0.0.1
+    container_name: streamlit
+    ports:
+      - "19000:19000"
+    deploy:
+      resources:
+        limits:
+          memory: 2GB
+    restart: always
+    healthcheck:
+      test: curl -f http://streamlit:19000/ || exit 1
+      interval: 25s
+      timeout: 10s
+      retries: 5
+    networks:
+      - rede-analise-credito
 
 volumes:
   zookeeper_data:
