@@ -1,0 +1,60 @@
+# Imagem de origem
+FROM ubuntu:20.04
+
+# Define o bash padrão para execução dos comandos
+SHELL ["/bin/bash", "-c"]
+
+# Atualiza o repositório APT, Instala o Python3.8, VENV, Nano, systemctl e etc...
+RUN apt update && \
+  apt install python3.8 \
+  python3.8-venv \
+  systemctl \
+  curl \
+  nano \
+  zip \
+  unzip \
+  tzdata \
+  sudo -y 
+
+# Cria o usuário, senha e diretório para aplicação
+RUN useradd -ms /bin/bash streamlit -G sudo && \
+  passwd -d streamlit && \
+  mkdir -p /home/streamlit/python/streamlit/
+
+# Seleciona a pasta para ser utilizada nos comandos seguintes
+WORKDIR /home/streamlit/python/streamlit
+
+# Cópia dos arquivos da aplicação
+COPY app/ .
+
+# Cópia os arquivos para criar os serviços
+ADD deploy/streamlit.service /etc/systemd/system/
+
+# Configurando o Python para aplicação
+RUN su - streamlit && \
+  cd /home/streamlit/python/streamlit/ && \
+  python3 -m venv .venv && \
+  source .venv/bin/activate && \
+  pip install -U pip setuptools wheel&& \
+  pip install -r requirements.txt && \
+  chown -R streamlit:streamlit /home/streamlit
+
+# Variáveis de ambiente do servidor
+ENV TZ="America/Sao_Paulo"
+
+# Configurando os serviços da aplicação
+RUN systemctl daemon-reload && \
+  systemctl enable streamlit.service 
+
+# Atribui o usuário da Aplicação para os comandos seguintes
+USER streamlit
+
+# porta de acesso a aplicação
+EXPOSE 19000
+
+# Start da aplicação no servidor
+ENTRYPOINT systemctl start streamlit.service 
+
+
+# docker build -f dockerfile -t imagem-base-streamlit:0.0.1 .
+# docker run --rm -d -p 19000:19000 --name streamlit imagem-base-streamlit:0.0.1

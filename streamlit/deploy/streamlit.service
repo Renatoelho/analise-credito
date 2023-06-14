@@ -1,0 +1,13 @@
+[Unit]
+Description=Servidor Streamlit
+After=multi-user.target
+
+[Service]
+Type=simple
+Restart=always
+WorkingDirectory=/home/streamlit/python/streamlit/
+User=streamlit
+ExecStart=/bin/bash -c 'source /home/streamlit/python/streamlit/.venv/bin/activate && streamlit run --server.port 19000 --server.address 0.0.0.0 /home/streamlit/python/streamlit/app.py'
+
+[Install]
+WantedBy=multi-user.target
