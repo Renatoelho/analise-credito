@@ -1,28 +1,55 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <template encoding-version="1.3">
     <description></description>
-    <groupId>55450f46-0188-1000-ca64-d6be7cd9777c</groupId>
-    <name>FLOW_MONITORAMENTO_ENTREGA_RESULTADOS_202306020615</name>
+    <groupId>bde8f234-0188-1000-6bdd-3d0346dff17d</groupId>
+    <name>FLOW_MONITORAMENTO_ENTREGA_RESULTADO</name>
     <snippet>
         <processGroups>
-            <id>4dba2446-e005-311d-0000-000000000000</id>
-            <parentGroupId>2b0ac59a-4797-3300-0000-000000000000</parentGroupId>
+            <id>07bc2d2b-bee1-3f7d-0000-000000000000</id>
+            <parentGroupId>92cab6dd-2e9a-3638-0000-000000000000</parentGroupId>
             <position>
                 <x>0.0</x>
                 <y>0.0</y>
             </position>
-            <versionedComponentId>4dba2446-e005-311d-9c33-65c882b37e99</versionedComponentId>
             <comments></comments>
             <contents>
                 <connections>
-                    <id>29647dac-6c6a-3547-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
+                    <id>99936b2c-7d35-34a4-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
+                    <versionedComponentId>daa668cf-95b4-38a3-9612-b01eea715792</versionedComponentId>
+                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+                    <destination>
+                        <groupId>07bc2d2b-bee1-3f7d-0000-000000000000</groupId>
+                        <id>956106b7-9112-32f1-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>dd82a97f-5382-3a0b-b9e5-daa464baf81f</versionedComponentId>
+                    </destination>
+                    <flowFileExpiration>0 sec</flowFileExpiration>
+                    <labelIndex>1</labelIndex>
+                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+                    <name></name>
+                    <selectedRelationships>success</selectedRelationships>
+                    <source>
+                        <groupId>07bc2d2b-bee1-3f7d-0000-000000000000</groupId>
+                        <id>0d2b719f-03dd-3fcc-0000-000000000000</id>
+                        <type>PROCESSOR</type>
+                        <versionedComponentId>d7123817-ad18-3cb2-bd5a-56bf99912464</versionedComponentId>
+                    </source>
+                    <zIndex>0</zIndex>
+                </connections>
+                <connections>
+                    <id>bcb2740b-d4a8-31e6-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
                     <versionedComponentId>29647dac-6c6a-3547-925b-2002917a9224</versionedComponentId>
                     <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
                     <backPressureObjectThreshold>100000</backPressureObjectThreshold>
                     <destination>
-                        <groupId>4dba2446-e005-311d-0000-000000000000</groupId>
-                        <id>04da8097-2961-3ed2-0000-000000000000</id>
+                        <groupId>07bc2d2b-bee1-3f7d-0000-000000000000</groupId>
+                        <id>bf824a29-8990-3742-0000-000000000000</id>
                         <type>FUNNEL</type>
                         <versionedComponentId>04da8097-2961-3ed2-9963-c70efa96abed</versionedComponentId>
                     </destination>
@@ -36,44 +63,16 @@
                     <prioritizers>org.apache.nifi.prioritizer.FirstInFirstOutPrioritizer</prioritizers>
                     <selectedRelationships>success</selectedRelationships>
                     <source>
-                        <groupId>4dba2446-e005-311d-0000-000000000000</groupId>
-                        <id>dd82a97f-5382-3a0b-0000-000000000000</id>
+                        <groupId>07bc2d2b-bee1-3f7d-0000-000000000000</groupId>
+                        <id>956106b7-9112-32f1-0000-000000000000</id>
                         <type>PROCESSOR</type>
                         <versionedComponentId>dd82a97f-5382-3a0b-b9e5-daa464baf81f</versionedComponentId>
-                    </source>
-                    <zIndex>0</zIndex>
-                </connections>
-                <connections>
-                    <id>daa668cf-95b4-38a3-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
-                    <versionedComponentId>daa668cf-95b4-38a3-9612-b01eea715792</versionedComponentId>
-                    <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
-                    <backPressureObjectThreshold>10000</backPressureObjectThreshold>
-                    <destination>
-                        <groupId>4dba2446-e005-311d-0000-000000000000</groupId>
-                        <id>dd82a97f-5382-3a0b-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                        <versionedComponentId>dd82a97f-5382-3a0b-b9e5-daa464baf81f</versionedComponentId>
-                    </destination>
-                    <flowFileExpiration>0 sec</flowFileExpiration>
-                    <labelIndex>1</labelIndex>
-                    <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
-                    <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
-                    <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
-                    <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
-                    <name></name>
-                    <selectedRelationships>success</selectedRelationships>
-                    <source>
-                        <groupId>4dba2446-e005-311d-0000-000000000000</groupId>
-                        <id>d7123817-ad18-3cb2-0000-000000000000</id>
-                        <type>PROCESSOR</type>
-                        <versionedComponentId>d7123817-ad18-3cb2-bd5a-56bf99912464</versionedComponentId>
                     </source>
                     <zIndex>0</zIndex>
                 </connections>
                 <funnels>
-                    <id>04da8097-2961-3ed2-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
+                    <id>bf824a29-8990-3742-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
                     <position>
                         <x>1160.0</x>
                         <y>1248.0</y>
@@ -81,8 +80,8 @@
                     <versionedComponentId>04da8097-2961-3ed2-9963-c70efa96abed</versionedComponentId>
                 </funnels>
                 <labels>
-                    <id>1249423f-0e4b-3676-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
+                    <id>459daa36-6485-35a3-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
                     <position>
                         <x>936.0</x>
                         <y>696.0</y>
@@ -102,11 +101,11 @@ das análises de crédito no KAFKA</label>
                         </entry>
                     </style>
                     <width>504.0</width>
-                    <zIndex>2</zIndex>
+                    <zIndex>1</zIndex>
                 </labels>
                 <labels>
-                    <id>b1aed08d-26cc-33e3-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
+                    <id>cce383a2-d292-3f37-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
                     <position>
                         <x>936.0</x>
                         <y>752.0</y>
@@ -120,11 +119,11 @@ das análises de crédito no KAFKA</label>
                         </entry>
                     </style>
                     <width>496.0</width>
-                    <zIndex>1</zIndex>
+                    <zIndex>0</zIndex>
                 </labels>
                 <processors>
-                    <id>d7123817-ad18-3cb2-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
+                    <id>0d2b719f-03dd-3fcc-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
                     <position>
                         <x>1008.0</x>
                         <y>776.0</y>
@@ -440,8 +439,8 @@ das análises de crédito no KAFKA</label>
                     <type>org.apache.nifi.processors.kafka.pubsub.ConsumeKafka_2_6</type>
                 </processors>
                 <processors>
-                    <id>dd82a97f-5382-3a0b-0000-000000000000</id>
-                    <parentGroupId>4dba2446-e005-311d-0000-000000000000</parentGroupId>
+                    <id>956106b7-9112-32f1-0000-000000000000</id>
+                    <parentGroupId>07bc2d2b-bee1-3f7d-0000-000000000000</parentGroupId>
                     <position>
                         <x>1008.0</x>
                         <y>1000.0</y>
@@ -550,5 +549,5 @@ das análises de crédito no KAFKA</label>
             <variables/>
         </processGroups>
     </snippet>
-    <timestamp>06/02/2023 06:16:28 BRT</timestamp>
+    <timestamp>06/15/2023 04:43:34 BRT</timestamp>
 </template>

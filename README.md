@@ -1,12 +1,14 @@
 # Análise de crédito em tempo real
 
-![Análise de crédito em tempo real](docs/analise-credito-em-tempo-real.drawio.png)
+![Análise de crédito em tempo real](docs/analise-credito-em-tempo-real-Flow-2.drawio.png)
 
 Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para atender a esse propósito.
 
-Nesse contexto, estamos propondo uma solução para processar análise de crédito "quase" em ***tempo real*** a partir de eventos gerados pelas regionais de uma hipotética grande empresa de concessão de crédito. A financeira XYZ S.A. tem abrangência em todo o território nacional e concentra todas as operações de análise de crédito em sua matriz, da qual recebe as solicitações de suas regionais, onde existem dezenas de representantes que comercializam seus produtos de crédito. Por alguma regra de negócio, cada uma das cinco regionais centraliza todas as solicitações de ***análise e concessão de crédito*** referente a sua regional. A solução proposta aqui captura os eventos de solicitação de crédito que são enviados para uma ferramenta de mensageria mantida pela matriz, e cada regional é responsável por enviar o evento para um tópico que, além de armazenar todos os metadados do processamento, inclui o processamento, a devolutiva dos resultados e o registro da confirmação da devolutiva.
+Nesse contexto, estamos propondo uma solução para processar ***análise de crédito quase em tempo real*** com base nos eventos gerados pelas regionais de uma hipotética grande empresa de concessão de crédito. A empresa financeira XYZ S.A., com alcance nacional, centraliza todas as operações de análise de crédito em sua matriz. As solicitações de crédito são recebidas pelas regionais, onde vários representantes comercializam os produtos de crédito. De acordo com as regras de negócio, cada regional centraliza as solicitações de análise e concessão de crédito para sua respectiva área geográfica e, posteriormente, repassam para a matriz realizar o processamento.
 
-O evento de origem passa por um "motor" de ***concessão de crédito*** que define se a solicitação será aceita ou não, e se aceita, qual será o percentual aprovado e três opções de parcelamento. O motor apresentado aqui aprovará ou reprovará a solicitação de forma aleatória, uma vez que a proposta é apresentar e implementar o fluxo. Todas as informações referentes aos dados e metadados serão armazenadas em um banco de dados relacional para futuras análises, com um backup na nuvem para resguardar essas informações. Tudo isso será orquestrado por uma ferramenta que flexibiliza as implementações e dá velocidade ao desenvolvimento e a visualização e monitoramento será feita via um notebook interativo.
+A solução proposta será responsável por armazenar todos os metadados relacionados ao processamento do evento, execução do motor de análise de crédito, além de contar com uma parte dedicada à visualização e monitoramento. Isso abrange o recebimento e processamento do evento em si, os resultados retornados e o registro da confirmação do retorno dos resultados. Além disso, a solução fornecerá recursos de visualização e monitoramento para acompanhar o progresso e o desempenho do processo de análise de crédito.
+
+O evento de origem passa por um "motor" de ***concessão de crédito*** que define se a solicitação será aceita ou não, e se aceita, qual será o percentual aprovado e três opções de parcelamento. O motor apresentado aqui aprovará ou reprovará a solicitação de forma aleatória, uma vez que a proposta é apresentar e implementar o fluxo. Todas as informações referentes aos dados e metadados serão armazenadas em um banco de dados relacional para futuras análises, com um backup na nuvem para resguardar essas informações. Tudo isso será orquestrado por uma ferramenta que flexibiliza as implementações e dá velocidade ao desenvolvimento e a visualização e monitoramento será feita via ferramenta interativa.
 
 Ao final, o evento de resultado da análise será devolvido via ferramenta de mensageria para sua regional de origem, ficando a partir daí a regional responsável por dar continuidade a todo o processo.
 
@@ -216,7 +218,7 @@ docker-compose -f docker-compose.yaml --compatibility up -d
 
 ## Ajustando as permissões dos volumes docker
 
-Para manter os dados das aplicações que estamos utilizando, será criado o diretório ```volumes```. Nele, serão armazenados todos os dados do Apache NiFi, Apache NiFi Registry e SQL Server. As demais aplicações têm seus volumes gerenciados diretamente pelo Docker. Portanto, se após a ativação dos serviços você notar algum problema nas aplicações mencionadas aqui, cujos dados estão armazenados no diretório ```volumes```, faça o down de todos os serviços ativos, altere as permissões do diretório ```volumes``` e, em seguida, inicie novamente todos os serviços. 
+Para manter os dados das aplicações que estamos utilizando, será criado o diretório ```volumes```. Nele, serão armazenados alguns dos dados do Apache NiFi, Apache NiFi Registry e SQL Server. As demais aplicações, incluindo essas, têm seus volumes gerenciados diretamente pelo Docker. Portanto, se após a ativação dos serviços você notar algum problema nas aplicações mencionadas aqui, cujos dados estão armazenados no diretório ```volumes```, faça o down de todos os serviços ativos, altere as permissões do diretório ```volumes``` e, em seguida, inicie novamente todos os serviços.
 
 Execute a seguinte sequência de comandos:
 
@@ -381,7 +383,7 @@ Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativ
 
 1. ***Passo*** - Monitorando o resultado das análises de crédito
 
-Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADOS.xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
+Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADO.xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
 
 2. ***Passo*** - Visualizações com Streamlit
 
