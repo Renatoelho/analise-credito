@@ -2,18 +2,18 @@
 
 ![Análise de crédito em tempo real](docs/analise-credito-em-tempo-real-Flow-2.drawio.png)
 
-[![Apache Nifi](https://img.shields.io/badge/Apache%20Nifi-1.19.0-748C9C)](https://hub.docker.com/r/apache/nifi)
-[![Apache Nifi Registry](https://img.shields.io/badge/Apache%20Nifi%20Registry-1.19.0-C0CCD4)](https://hub.docker.com/r/apache/nifi-registry)
+[![Apache Nifi](https://img.shields.io/badge/Apache%20Nifi-1.19.0-E3E3E3)](https://hub.docker.com/r/apache/nifi)
+[![Apache Nifi Registry](https://img.shields.io/badge/Apache%20Nifi%20Registry-1.19.0-E3E3E3)](https://hub.docker.com/r/apache/nifi-registry)
 [![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-3.4-E3E3E3)](https://hub.docker.com/r/bitnami/kafka)
-[![Apache Zookeeper](https://img.shields.io/badge/Apache%20Zookeeper-3.8-7C7C7C)](https://hub.docker.com/r/bitnami/zookeeper)
-[![SQL Server](https://img.shields.io/badge/SQL%20Server-2022--latest-CC2436)](https://learn.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&tabs=ubuntu&pivots=cs1-bash)
-[![MinIO](https://img.shields.io/badge/MinIO-2023-C52D4C)](https://hub.docker.com/r/bitnami/minio)
-[![Streamlit](https://img.shields.io/badge/Streamlit-1.23.1-FA4E4E)](https://docs.streamlit.io/)
-[![Python](https://img.shields.io/badge/Python-3.8-FBE05A)](https://www.python.org/downloads/release/python-3810/)
-[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E35423)](https://releases.ubuntu.com/focal/)
-[![Docker](https://img.shields.io/badge/Docker-23.0.3-049BC3)](https://docs.docker.com/engine/install/ubuntu/)
-[![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-BCCCDC)](https://docs.docker.com/compose/history/)
-[![Git](https://img.shields.io/badge/Git-2.25.1%2B-F47C64)](https://git-scm.com/)
+[![Apache Zookeeper](https://img.shields.io/badge/Apache%20Zookeeper-3.8-E3E3E3)](https://hub.docker.com/r/bitnami/zookeeper)
+[![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-E3E3E3)](https://learn.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&tabs=ubuntu&pivots=cs1-bash)
+[![MinIO](https://img.shields.io/badge/MinIO-2023-E3E3E3)](https://hub.docker.com/r/bitnami/minio)
+[![Streamlit](https://img.shields.io/badge/Streamlit-1.23.1-E3E3E3)](https://docs.streamlit.io/)
+[![Python](https://img.shields.io/badge/Python-3.8-E3E3E3)](https://www.python.org/downloads/release/python-3810/)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)](https://releases.ubuntu.com/focal/)
+[![Docker](https://img.shields.io/badge/Docker-23.0.3-E3E3E3)](https://docs.docker.com/engine/install/ubuntu/)
+[![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-E3E3E3)](https://docs.docker.com/compose/history/)
+[![Git](https://img.shields.io/badge/Git-2.25.1%2B-E3E3E3)](https://git-scm.com/)
 
 Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para atender a esse propósito.
 
@@ -98,13 +98,13 @@ O ***Docker Compose*** é uma ferramenta que permite que os usuários definam e 
 
 # Requisitos<a name="requisitos"></a>
 
-+ ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-blue)
++ ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)
 
-+ ![Docker](https://img.shields.io/badge/Docker-23.0.3-blue)
++ ![Docker](https://img.shields.io/badge/Docker-23.0.3-E3E3E3)
 
-+ ![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-blue)
++ ![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-E3E3E3)
 
-+ ![Git](https://img.shields.io/badge/Git-2.25.1%2B-blue)
++ ![Git](https://img.shields.io/badge/Git-2.25.1%2B-E3E3E3)
 
 ***Importante:*** Na implementação, todos os serviços consumiram aproximadamente 6 GB de RAM, portanto, é recomendado ter pelo menos 8 GB de memória em seu notebook/PC.
 
