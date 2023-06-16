@@ -2,6 +2,19 @@
 
 ![Análise de crédito em tempo real](docs/analise-credito-em-tempo-real-Flow-2.drawio.png)
 
+![Apache Nifi](https://img.shields.io/badge/Apache%20Nifi-1.19.0-748C9C)
+![Apache Nifi Registry](https://img.shields.io/badge/Apache%20Nifi%20Registry-1.19.0-C0CCD4)
+![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-3.4-E3E3E3)
+![Apache Zookeeper](https://img.shields.io/badge/Apache%20Zookeeper-3.8-7C7C7C)
+![SQL Server](https://img.shields.io/badge/SQL%20Server-2022--latest-CC2436)
+![MinIO](https://img.shields.io/badge/MinIO-2023-C52D4C)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.23.1-FA4E4E)
+![Python](https://img.shields.io/badge/Python-3.8-FBE05A)
+![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E35423)
+![Docker](https://img.shields.io/badge/Docker-23.0.3-049BC3)
+![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-BCCCDC)
+![Git](https://img.shields.io/badge/Git-2.25.1%2B-F47C64)
+
 Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para atender a esse propósito.
 
 Nesse contexto, estamos propondo uma solução para processar ***análise de crédito quase em tempo real*** com base nos eventos gerados pelas regionais de uma hipotética grande empresa de concessão de crédito. A empresa financeira XYZ S.A., com alcance nacional, centraliza todas as operações de análise de crédito em sua matriz. As solicitações de crédito são recebidas pelas regionais, onde vários representantes comercializam os produtos de crédito. De acordo com as regras de negócio, cada regional centraliza as solicitações de análise e concessão de crédito para sua respectiva área geográfica e, posteriormente, repassam para a matriz realizar o processamento.
@@ -23,14 +36,14 @@ Além disso, utilizaremos o ***Streamlit*** que nos permite criar e executar apl
 
 Sou Analista de Big Data em uma grande multinacional de seguros. Tenho experiência na automatização de processos e estruturação de pipelines de dados. Também atuo como professor de tecnologia, compartilhando meu conhecimento em Linux, Data Lake, Python, Docker, Apache Nifi, Shell Script, SQL e expressões regulares. 
 
-[Linkedin do Renato](https://www.linkedin.com/in/renatoelho/)
+[![LinkedIn Renato](https://img.shields.io/badge/LinkedIn-Renato-0077B5)](https://www.linkedin.com/in/renatoelho/)
+
 
 ***Gyan Lucas*** 
 
 Sou Analista de Processos com foco em dados em uma empresa de consórcios. Com especialização em Data Science, atuo na gestão e extração dos dados bem como na geração de insights de valor a empresa. Extensa experiência com SQL, Power BI, Power automate, Power Apps e VBA.
 
-[Linkedin do Gyan](https://www.linkedin.com/in/gyan-almeida-2102a8177)
-
+[![LinkedIn Gyan](https://img.shields.io/badge/LinkedIn-Gyan-0077B5)](https://www.linkedin.com/in/gyan-almeida-2102a8177)
 
 # Tópicos
 
@@ -85,13 +98,13 @@ O ***Docker Compose*** é uma ferramenta que permite que os usuários definam e 
 
 # Requisitos<a name="requisitos"></a>
 
-+ Ubuntu 20.04 (Host)
++ ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-blue)
 
-+ Docker 23.0.3 (Host)
++ ![Docker](https://img.shields.io/badge/Docker-23.0.3-blue)
 
-+ Docker-Compose 1.25.0 (Host)
++ ![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-blue)
 
-+ Git 2.25.1 ou superior (Host)
++ ![Git](https://img.shields.io/badge/Git-2.25.1%2B-blue)
 
 ***Importante:*** Na implementação, todos os serviços consumiram aproximadamente 6 GB de RAM, portanto, é recomendado ter pelo menos 8 GB de memória em seu notebook/PC.
 
