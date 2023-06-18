@@ -6,3 +6,4 @@
 /**/docker-compose-sqlserver.yaml
 /**/README-dev.md
 /**/docker-compose-sem-streamlit.yaml
+/**/docker-compose-sem-control-center.yaml

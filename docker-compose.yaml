@@ -6,7 +6,7 @@ services:
       - kafka
     hostname: regional-sul
     image: imagem-base-simulador:0.0.1
-    container_name: regional_sul
+    container_name: regional-sul
     ports:
       - "8881:8888"
     environment:
@@ -28,7 +28,7 @@ services:
       - kafka
     hostname: regional-sudeste
     image: imagem-base-simulador:0.0.1
-    container_name: regional_sudeste
+    container_name: regional-sudeste
     ports:
       - "8882:8888"
     environment:
@@ -50,7 +50,7 @@ services:
       - kafka
     hostname: regional-centro-oeste
     image: imagem-base-simulador:0.0.1
-    container_name: regional_centro_oeste
+    container_name: regional-centro-oeste
     ports:
       - "8883:8888"
     environment:
@@ -72,7 +72,7 @@ services:
       - kafka
     hostname: regional-nordeste
     image: imagem-base-simulador:0.0.1
-    container_name: regional_nordeste
+    container_name: regional-nordeste
     ports:
       - "8884:8888"
     environment:
@@ -94,7 +94,7 @@ services:
       - kafka
     hostname: regional-norte
     image: imagem-base-simulador:0.0.1
-    container_name: regional_norte
+    container_name: regional-norte
     ports:
       - "8885:8888"
     environment:
@@ -116,7 +116,7 @@ services:
       - kafka
     hostname: motor-analise-credito
     image: imagem-base-simulador:0.0.1
-    container_name: motor_analise_credito
+    container_name: motor-analise-credito
     ports:
       - "8889:8888"
     deploy:
@@ -148,6 +148,7 @@ services:
       resources:
         limits:
           memory: 2G
+    restart: always
   kafka:
     depends_on:
       - zookeeper
@@ -162,8 +163,8 @@ services:
     volumes:
       - "kafka_data:/bitnami"
     environment:
-      - ALLOW_PLAINTEXT_LISTENER=yes # Remove criptografia (sem SSL/TLS)
-      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true # Permite criar tópicos somente enviando mensagens
+      - ALLOW_PLAINTEXT_LISTENER=yes
+      - KAFKA_AUTO_CREATE_TOPICS_ENABLE=true
       - KAFKA_ENABLE_KRAFT=no
       - KAFKA_CFG_ZOOKEEPER_CONNECT=zookeeper:2181
       - KAFKA_CFG_LISTENERS=PLAINTEXT://:9092,CONTROLLER://:9093,EXTERNAL://:9094
@@ -174,6 +175,7 @@ services:
       resources:
         limits:
           memory: 2G
+    restart: always
   nifi:
     depends_on:
       - kafka
@@ -303,6 +305,32 @@ services:
       retries: 5
     networks:
       - rede-analise-credito
+  control-center:
+    depends_on:
+      - kafka
+    hostname: control-center
+    image: confluentinc/cp-enterprise-control-center:7.3.0
+    container_name: control-center
+    ports:
+      - "19021:9021"
+    deploy:
+      resources:
+        limits:
+          memory: 2GB
+    restart: always
+    environment:
+      - CONTROL_CENTER_BOOTSTRAP_SERVERS=kafka:9092
+      - CONTROL_CENTER_ZOOKEEPER_CONNECT=zookeeper:2181
+      - CONTROL_CENTER_REPLICATION_FACTOR=1
+      - CONTROL_CENTER_INTERNAL_TOPICS_PARTITIONS=1
+      - CONTROL_CENTER_MONITORING_INTERCEPTOR_TOPIC_PARTITIONS=1
+      - CONTROL_CENTER_COMMAND_TOPIC_PARTITIONS=1
+      - CONTROL_CENTER_METRICS_TOPIC_PARTITIONS=1
+      - PORT=9021
+      - TZ=America/Sao_Paulo
+    networks:
+      - rede-analise-credito
+
 
 volumes:
   zookeeper_data:

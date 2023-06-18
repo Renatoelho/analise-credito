@@ -6,28 +6,25 @@
 [![Apache Nifi Registry](https://img.shields.io/badge/Apache%20Nifi%20Registry-1.19.0-E3E3E3)](https://hub.docker.com/r/apache/nifi-registry)
 [![Apache Kafka](https://img.shields.io/badge/Apache%20Kafka-3.4-E3E3E3)](https://hub.docker.com/r/bitnami/kafka)
 [![Apache Zookeeper](https://img.shields.io/badge/Apache%20Zookeeper-3.8-E3E3E3)](https://hub.docker.com/r/bitnami/zookeeper)
+[![Control Center](https://img.shields.io/badge/Control%20Center-7.3.0-E3E3E3)](https://hub.docker.com/r/confluentinc/cp-enterprise-control-center)
 [![SQL Server](https://img.shields.io/badge/SQL%20Server-2022-E3E3E3)](https://learn.microsoft.com/pt-br/sql/linux/quickstart-install-connect-docker?view=sql-server-ver15&tabs=ubuntu&pivots=cs1-bash)
 [![MinIO](https://img.shields.io/badge/MinIO-2023-E3E3E3)](https://hub.docker.com/r/bitnami/minio)
 [![Streamlit](https://img.shields.io/badge/Streamlit-1.23.1-E3E3E3)](https://docs.streamlit.io/)
 [![Python](https://img.shields.io/badge/Python-3.8-E3E3E3)](https://www.python.org/downloads/release/python-3810/)
-[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)](https://releases.ubuntu.com/focal/)
 [![Docker](https://img.shields.io/badge/Docker-23.0.3-E3E3E3)](https://docs.docker.com/engine/install/ubuntu/)
 [![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-E3E3E3)](https://docs.docker.com/compose/history/)
 [![Git](https://img.shields.io/badge/Git-2.25.1%2B-E3E3E3)](https://git-scm.com/)
+[![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)](https://releases.ubuntu.com/focal/)
 
-Este projeto, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para atender a esse propósito.
+Este projeto de engenharia de dados, desenvolvido por nós, [Renato Coelho](https://www.linkedin.com/in/renatoelho/) e [Gyan Lucas](https://www.linkedin.com/in/gyan-almeida-2102a8177), tem como objetivo ***conceitual*** e ***educativo*** demonstrar como seria uma solução de análise de crédito utilizando ferramentas open source e proprietárias em conjunto para atender a esse propósito.
 
 Nesse contexto, estamos propondo uma solução para processar ***análise de crédito quase em tempo real*** com base nos eventos gerados pelas regionais de uma hipotética grande empresa de concessão de crédito. A empresa financeira XYZ S.A., com alcance nacional, centraliza todas as operações de análise de crédito em sua matriz. As solicitações de crédito são recebidas pelas regionais, onde vários representantes comercializam os produtos de crédito. De acordo com as regras de negócio, cada regional centraliza as solicitações de análise e concessão de crédito para sua respectiva área geográfica e, posteriormente, repassam para a matriz realizar o processamento.
 
-A solução proposta será responsável por armazenar todos os metadados relacionados ao processamento do evento, execução do motor de análise de crédito, além de contar com uma parte dedicada à visualização e monitoramento. Isso abrange o recebimento e processamento do evento em si, os resultados retornados e o registro da confirmação do retorno dos resultados. Além disso, a solução fornecerá recursos de visualização e monitoramento para acompanhar o progresso e o desempenho do processo de análise de crédito.
+A solução proposta consiste em receber os eventos referentes às solicitações de análise de crédito, passá-las por um motor que analisará todas as solicitações e devolverá um evento para regional com a confirmação de aprovação ou reprovação da análise. Durante esse processo, os dados e metadados processados no fluxo serão armazenados e utilizados para monitoramento e visualização de todo o processo em tempo quase real.
 
-O evento de origem passa por um "motor" de ***concessão de crédito*** que define se a solicitação será aceita ou não, e se aceita, qual será o percentual aprovado e três opções de parcelamento. O motor apresentado aqui aprovará ou reprovará a solicitação de forma aleatória, uma vez que a proposta é apresentar e implementar o fluxo. Todas as informações referentes aos dados e metadados serão armazenadas em um banco de dados relacional para futuras análises, com um backup na nuvem para resguardar essas informações. Tudo isso será orquestrado por uma ferramenta que flexibiliza as implementações e dá velocidade ao desenvolvimento e a visualização e monitoramento será feita via ferramenta interativa.
+As ferramentas que vamos utilizar aqui são o ***Apache Kafka*** para gerenciar as solicitações, tanto para as solicitações quanto para os resultados das análises de crédito. O ***Apache Nifi*** será responsável por estruturar todo o fluxo de análise de crédito e orquestrar o recebimento, processamento e devolutiva. Além disso, temos o ***Apache Nifi Registry***, que faz backup dos flows desenvolvidos no Apache Nifi. Para armazenar os dados e metadados do processamento, temos uma instância de ***SQL Server*** para análises mais avançadas. Para o armazenamento de dados em nuvem, optamos por utilizar o ***MinIO*** em vez do S3 para desenvolvimento local, pois ele nos oferece a flexibilidade e o controle necessários para testar diferentes cenários e configurações localmente.
 
-Ao final, o evento de resultado da análise será devolvido via ferramenta de mensageria para sua regional de origem, ficando a partir daí a regional responsável por dar continuidade a todo o processo.
-
-As ferramentas que vamos utilizar aqui são o ***Apache Kafka*** para gerenciar as mensagens/eventos postados, tanto para as solicitações quanto para os resultados das análises de crédito. O ***Apache Nifi*** será responsável por estruturar todo o fluxo de análise de crédito e orquestrar o recebimento, processamento e devolutiva. Além disso, temos o ***Apache Nifi Registry***, que faz backup dos flows desenvolvidos no Apache Nifi. Para armazenar os metadados e dados dos processamentos, temos uma instância de ***SQL Server*** para análises mais avançadas. Para o armazenamento de dados em nuvem, optamos por utilizar o ***MinIO*** em vez do S3 para desenvolvimento local, pois ele nos oferece a flexibilidade e o controle necessários para testar diferentes cenários e configurações localmente.
-
-Além disso, utilizaremos o ***Streamlit*** que nos permite criar e executar aplicativos web interativos de forma rápida e fácil, facilitando o processo de análise e monitoramento da nossa solução de análise de crédito. 
+Além disso, utilizaremos o ***Control Center*** e o ***Streamlit***, que facilitarão o processo de análise e monitoramento da nossa solução como um todo.
 
 
 # Responsáveis pelo projeto
@@ -66,9 +63,9 @@ Sou Analista de Processos com foco em dados em uma empresa de consórcios. Com e
 O ***Apache Nifi Registry*** é um subprojeto do Apache Nifi que fornece um repositório central para gerenciamento de ***versionamento***, controle de acesso e colaboração para flows do Apache Nifi. Isso permite que as organizações gerenciem seus flows de forma mais eficiente e compartilhem seu trabalho com outras pessoas de maneira controlada e segura.
 
 
-### Apache Kafka/Zookeeper
+### Apache Kafka/Zookeeper e Control Center
 
-***Apache Kafka*** e o ***Apache ZooKeeper*** são componentes fundamentais para o processamento e gerenciamento de fluxos de dados em tempo real. Enquanto o Kafka lida com a ***ingestão***, armazenamento e ***entrega confiável*** das mensagens, o ZooKeeper garante a coordenação e a estabilidade do cluster Kafka. Juntos, eles oferecem uma solução robusta e escalável para aplicações de streaming de dados.
+O ***Apache Kafka*** é uma plataforma de streaming de dados para processamento em tempo real. O ***Apache ZooKeeper*** é um serviço de coordenação essencial para a estabilidade do cluster Kafka. O ***Control Center*** é uma ferramenta de monitoramento e gerenciamento com interface gráfica para acompanhar o desempenho do cluster Kafka. Juntos, eles oferecem uma solução poderosa e escalável para processamento de fluxos de dados em tempo real.
 
 
 ### MinIO/S3 
@@ -163,12 +160,17 @@ Em desenvolvimento...
 |Access Key        |Definir manualmente\*\*|
 |Secret Key        |Definir manualmente\*\*|
 
-+ Streamlit<a name="streamlit-credenciais"></a>
++ Streamlit
 
 |Parâmetro         |Valor         |
 |------------------|--------------|
 |URL externa       |http://localhost:19000|
 
++ Control Center
+
+|Parâmetro         |Valor         |
+|------------------|--------------| 
+|URL externa       |http://localhost:19021|
 
 > ***Observação:*** A diferença entre Broker/Host/URL interno ou externo é que os internos são utilizados dentro da rede onde as aplicações estão sendo executadas, permitindo a comunicação entre elas. Já os externos são destinados aos usuários para que possam acessar as ferramentas a partir de seus computadores, onde as aplicações estão sendo executadas.
 
@@ -392,17 +394,21 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, ou no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
 
 
-## Monitorando e analisando os resultados da análise de crédito
+## Monitorando e analisando o processo de análise de crédito
 
-1. ***Passo*** - Monitorando o resultado das análises de crédito
+1. ***Passo*** - Monitorando os eventos postados no Kafka
 
-Na pasta ```Flows```, existe o template ```FLOW_MONITORAMENTO_ENTREGA_RESULTADO.xml```, que monitora os eventos que as regionais devem receber como resultado das análises. Basta importá-lo e ativá-lo da mesma forma como fizemos com o fluxo principal, porém, de maneira mais simples.
+Para monitorar os eventos postados nos tópicos ***Kafka***, que são as solicitações de análise de crédito enviadas pelas regionais, assim como os resultados das análises gerados pelo nosso fluxo e enviados também ao Kafka, utilizaremos o ***Control Center***. Essa ferramenta torna a interação com o Kafka simples e clara. Para acessar o Control Center, acesse a seguinte URL:
 
-2. ***Passo*** - Visualizações com Streamlit
+[http://localhost:19021/](http://localhost:19021/)
 
-O Streamlit possibilitará a visualização de informações de monitoramento e execução do nosso processo de análise de crédito. Acesse o seguinte link para visualizar todos esses dados.
 
-http://localhost:19000/ ou [Clique aqui para ver as credencias de acesso...](#streamlit-credenciais)
+2. ***Passo*** - Visualização dos dados e metadados com Streamlit
+
+O ***Streamlit*** possibilitará a visualização de informações de monitoramento e execução do nosso processo de análise de crédito. Para acessar o Streamlit, acesse a seguinte URL:
+
+[http://localhost:19000/](http://localhost:19000/)
+
 
 
 # Referências<a name="referencias"></a>
@@ -446,3 +452,7 @@ Welcome to Apache ZooKeeper, ***Apache Zookeeper***. Disponível em: <https://zo
 Streamlit documentation, ***Streamlit***. Disponível em: <https://docs.streamlit.io/>. Acesso em: 14 jun. 2023.
 
 Service unit configuration, ***systemd.service***. Disponível em: <https://www.freedesktop.org/software/systemd/man/systemd.service.html>. Acesso em: 05 jun. 2023.
+
+Control Center, ***Docker Hub***. Disponível em: <https://hub.docker.com/r/confluentinc/cp-enterprise-control-center>. Acesso em: 17 jun. 2023.
+
+A Complete Comparison of Apache Kafka vs Confluent, ***Confluent***. Disponível em: <https://www.confluent.io/apache-kafka-vs-confluent/>. Acesso em: 17 jun. 2023.
