@@ -22,6 +22,8 @@ Nesse contexto, estamos propondo uma solução para processar ***análise de cr�
 
 A solução proposta consiste em receber os eventos referentes às solicitações de análise de crédito, passá-las por um motor que analisará todas as solicitações e devolverá um evento para regional com a confirmação de aprovação ou reprovação da análise. Durante esse processo, os dados e metadados processados no fluxo serão armazenados e utilizados para monitoramento e visualização de todo o processo em tempo quase real.
 
+> ***IMPORTANTE***: Este ambiente foi configurado para fins de desenvolvimento e estudos, e algumas configurações foram simplificadas para facilitar a compreensão do ambiente como um todo. No entanto, em um ambiente de produção, é crucial tomar precauções adicionais.
+
 As ferramentas que vamos utilizar aqui são o ***Apache Kafka*** para gerenciar as solicitações, tanto para as solicitações quanto para os resultados das análises de crédito. O ***Apache Nifi*** será responsável por estruturar todo o fluxo de análise de crédito e orquestrar o recebimento, processamento e devolutiva. Além disso, temos o ***Apache Nifi Registry***, que faz backup dos flows desenvolvidos no Apache Nifi. Para armazenar os dados e metadados do processamento, temos uma instância de ***SQL Server*** para análises mais avançadas. Para o armazenamento de dados em nuvem, optamos por utilizar o ***MinIO*** em vez do S3 para desenvolvimento local, pois ele nos oferece a flexibilidade e o controle necessários para testar diferentes cenários e configurações localmente.
 
 Além disso, utilizaremos o ***Control Center*** e o ***Streamlit***, que facilitarão o processo de análise e monitoramento da nossa solução como um todo.
