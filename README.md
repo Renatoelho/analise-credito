@@ -49,7 +49,7 @@ Sou Analista de Processos com foco em dados em uma empresa de consórcios. Com e
 + [Tecnologias](#tecnologias)
 + [Requisitos](#requisitos) 
 + [Apresentação em vídeo](#apresentacao-video)
-+ [Implementação](#implementacao)
++ [Implantação](#implantacao)
 + [Referências](#referencias)
 
 
@@ -97,15 +97,15 @@ O ***Docker Compose*** é uma ferramenta que permite que os usuários definam e 
 
 # Requisitos<a name="requisitos"></a>
 
-+ ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)
-
 + ![Docker](https://img.shields.io/badge/Docker-23.0.3-E3E3E3)
 
 + ![Docker-compose](https://img.shields.io/badge/Docker--compose-1.25.0-E3E3E3)
 
 + ![Git](https://img.shields.io/badge/Git-2.25.1%2B-E3E3E3)
 
-***Importante:*** Na implementação, todos os serviços consumiram aproximadamente 6 GB de RAM, portanto, é recomendado ter pelo menos 8 GB de memória em seu notebook/PC.
++ ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)
+
+***Importante:*** Na implantação, todos os serviços consumiram aproximadamente 7 GB de RAM, portanto, é recomendado ter pelo menos 16 GB de memória em seu notebook/PC.
 
 
 # Apresentação em vídeo<a name="apresentacao-video"></a>
@@ -113,7 +113,7 @@ O ***Docker Compose*** é uma ferramenta que permite que os usuários definam e 
 Em desenvolvimento...
 
 
-# Implementação<a name="implementacao"></a>
+# Implantação<a name="implantacao"></a>
 
 
 ## Credenciais de acesso às ferramentas
@@ -183,7 +183,7 @@ Em desenvolvimento...
 git clone https://github.com/Renatoelho/analise-credito.git analise-credito
 ```
 
-> ***Observação:*** Será criado um diretório chamado "análise-crédito" em seu computador, onde estarão todos os arquivos necessários para a implementação do projeto.
+> ***Observação:*** Será criado um diretório chamado "análise-crédito" em seu computador, onde estarão todos os arquivos necessários para a implantação do projeto.
 
 
 ## Construindo a imagem base das regionais
@@ -265,7 +265,7 @@ docker ps --format "{{.ID}}\t{{.Names}}\t{{.Status}}"
 
 ## Protegendo nossos flows com o Apache Nifi Registry
 
-O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criado no Apache Nifi estejam seguros. 
+O Apache Nifi Registry é responsável por versionar e proteger os flows existentes no Apache Nifi, como nossos serviços estão todos ativos vamos fazer as configurações necessárias para que todos os flows importados ou criados no Apache Nifi estejam seguros. 
 
 Para isso siga os seguintes passos:
 
@@ -393,7 +393,7 @@ Esse processo é responsável por receber as mensagens enviadas pelas regionais,
 
     - Redimensione a visão do Flow, clique em alguma parte em branco e com o botão direito do mouse clique em ```Start```.
 
-Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, ou no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implementação.
+Pronto, nosso fluxo de análise de crédito em tempo “quase” real está ativo e em funcionamento. Agora você pode visualizar os dados gravados no SQL Server, ou no backup em nossa nuvem. Para isso, basta utilizar as credenciais fornecidas no início da implantação.
 
 
 ## Monitorando e analisando o processo de análise de crédito
