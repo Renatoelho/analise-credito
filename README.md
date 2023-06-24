@@ -331,7 +331,7 @@ http://localhost:9001/ - [Usuário e senha clique aqui...](#minio-credenciais)
 
 3. ***Passo*** - Crie as chaves Access e Secret keys
 
-***Access Keys*** >> ***Create Access Keys*** >> ***Download for import***>> ***Create***
+***Access Keys*** >> ***Create Access Keys*** >> ***Create*** >> ***Download for import***
 
 Guarde o arquivo JSON ```credentials.json```com as chaves e também salve-as em um local seguro, pois as utilizaremos posteriormente.
 
