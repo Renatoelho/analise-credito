@@ -48,7 +48,6 @@ Sou Analista de Processos com foco em dados em uma empresa de consórcios. Com e
 
 + [Tecnologias](#tecnologias)
 + [Requisitos](#requisitos) 
-+ [Apresentação em vídeo](#apresentacao-video)
 + [Implantação](#implantacao)
 + [Referências](#referencias)
 
@@ -106,11 +105,6 @@ O ***Docker Compose*** é uma ferramenta que permite que os usuários definam e 
 + ![Ubuntu](https://img.shields.io/badge/Ubuntu-20.04-E3E3E3)
 
 ***Importante:*** Na implantação, todos os serviços consumiram aproximadamente 7 GB de RAM, portanto, é recomendado ter pelo menos 16 GB de memória em seu notebook/PC.
-
-
-# Apresentação em vídeo<a name="apresentacao-video"></a>
-
-Em desenvolvimento...
 
 
 # Implantação<a name="implantacao"></a>
